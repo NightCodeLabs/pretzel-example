@@ -9,5 +9,7 @@
 5. pip install locustio  
 6. add locustio to your env. path  
 7. restart cmd  
-8. maven install   
+8. install maven
+9. maven install the project   
+
 
