@@ -79,9 +79,11 @@ public class LocustOperations {
     public void executePerformanceTask(DataTable testData) throws Exception {
         setTestData(testData);
         executeMaster();
+        TimeUnit.SECONDS.sleep(5);
         setUpSlave();
         executeTask(testData);
         TimeUnit.MINUTES.sleep(this.testTime);
+        locust.stop();
     }
 	
     

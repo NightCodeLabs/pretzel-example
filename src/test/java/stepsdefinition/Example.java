@@ -8,10 +8,12 @@ import performance.LocustOperations;
 
 public class Example {
 
+	LocustOperations locustOperations;
+
 	
 	@Given("^Multiple users are requesting for a forced YES answer$")
 	public void multiple_users_are_requesting_for_a_forced_YES_answer(DataTable arg1) throws Throwable {
-		LocustOperations locustOperations = new LocustOperations();
+		locustOperations = new LocustOperations();
 		locustOperations.executePerformanceTask(arg1);
 	}
 
