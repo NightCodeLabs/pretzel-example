@@ -1,3 +1,0 @@
-"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
-"GET","YesNo2 Api GET",57,0,250,249,233,274,1,1.03
-"None","Total",57,0,250,249,233,274,1,1.03
