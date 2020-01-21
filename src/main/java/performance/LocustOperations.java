@@ -1,5 +1,4 @@
 package performance;
-
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +14,7 @@ public class LocustOperations {
 	private static final String TASKPACKAGEPATH = "locustTask";
 	private static final String NAMEOFREPORT = "performanceResults";
 	private static final String MASTERFILELOCATION = "src/main/resources/performance/locust-master.py";
-    private static final String CSVPATH = "src/test/resources/performance/csvlocustsresults/";
+    private static final String CSVPATH = "target/csvlocustsresults/";
     private String masterFilePath = Paths.get(MASTERFILELOCATION).toFile().getAbsolutePath();
     private String csvReportFilePath = Paths.get(CSVPATH).toFile().getAbsolutePath();
 
@@ -65,8 +64,18 @@ public class LocustOperations {
 	 * This method raise the master with the parameters of the test defined in cucumber
 	 */
     public void executeMaster() {
-        String command="cmd.exe /c start /MIN locust.exe -f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
-        try {
+
+        String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
+        String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
+
+        if (OPERATING_SYSTEM.indexOf("win") >= 0) {
+
+        command = "cmd.exe /c start /MIN locust.exe " + command;
+           }
+        else {
+        command= "locust " + command;
+        }
+          try {
         	process = Runtime.getRuntime().exec(command);
         } catch (IOException error) {
            System.out.println(error.getMessage());
