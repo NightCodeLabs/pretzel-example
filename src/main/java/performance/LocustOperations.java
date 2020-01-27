@@ -1,22 +1,27 @@
 package performance;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
+
+import org.junit.Assert;
+
 import helpers.AuxiliarMethods;
 
 import com.github.myzhan.locust4j.AbstractTask;
 import com.github.myzhan.locust4j.Locust;
 
 import cucumber.api.DataTable;
+import graph.LocustBarChart;
 
 public class LocustOperations {
 
 	private static final String TASKPACKAGEPATH = "locustTask";
 	private static final String NAMEOFREPORT = "performanceResults";
 	private static final String MASTERFILELOCATION = "src/main/resources/performance/locust-master.py";
-    private static final String CSVPATH = "target/csvlocustsresults/";
+    private static final String CSVLOCATION = "target/csvlocustsresults/";
     private String masterFilePath = Paths.get(MASTERFILELOCATION).toFile().getAbsolutePath();
-    private String csvReportFilePath = Paths.get(CSVPATH).toFile().getAbsolutePath();
+    private String csvReportFilePath = Paths.get(CSVLOCATION).toFile().getAbsolutePath();
 
 	private String locustTask;
     private String master = "127.0.0.1";
@@ -64,7 +69,6 @@ public class LocustOperations {
 	 * This method raise the master with the parameters of the test defined in cucumber
 	 */
     public void executeMaster() {
-
         String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
         String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
 
@@ -88,12 +92,22 @@ public class LocustOperations {
     public void executePerformanceTask(DataTable testData) throws Exception {
         setTestData(testData);
         executeMaster();
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(10);
         setUpSlave();
         executeTask(testData);
         TimeUnit.MINUTES.sleep(this.testTime);
         locust.stop();
     }
+    
+    public Boolean checkMinResponseTime(DataTable testData) {
+    	LocustBarChart locustBarChart = new LocustBarChart();
+    	locustBarChart.createChart(0);
+    	Boolean higher = false;
+    	if (Long.parseLong(locustBarChart.getMaxRT())>Long.parseLong(auxiliar.getDataTableValue(testData, "Expected Time"))){
+    		higher = true;
+    	};
+    	return higher;
+    }  
 	
     
     
