@@ -8,6 +8,7 @@ import com.cucumber.listener.Reporter;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import graph.LocustBarChart;
 
 public class Hooks {
 	
@@ -20,9 +21,10 @@ public class Hooks {
 	 
 	 @After(order = 0)
 	 public void AfterSteps() throws IOException {
-		 
-		 File destinationPath = new File(Paths.get("target/performanceChart.PNG").toFile().getAbsolutePath());
-         Reporter.addScreenCaptureFromPath(destinationPath.toString());
+		 LocustBarChart locustBarChart = new LocustBarChart();
+	     locustBarChart.createChart(0);
+		 File destinationPath = new File(Paths.get("target/cucumber-reports/locustcharts/" + locustBarChart.getReportName()).toFile().getAbsolutePath());
+         Reporter.addScreenCaptureFromPath(destinationPath.toString(), "Performance Results");
 	    
 	 }
 

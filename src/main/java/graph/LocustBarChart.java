@@ -23,9 +23,10 @@ public class LocustBarChart {
     private static final int CHARTWIDTH= 1000;
     private static final int CHARTHEIGHT=800;
     private static final String ABSOLUTEPATHTOSTORECHART = Paths.get("target/cucumber-reports/locustcharts/").toFile().getAbsolutePath();
-    private static final String FILEPATH = ABSOLUTEPATHTOSTORECHART + "/performanceChart.PNG";
     private static final String ERROR = "ERROR CREATING THE GRAPH";
     
+    private String reportName = "performanceChart"+System.currentTimeMillis()+".png";
+    private String filePath = ABSOLUTEPATHTOSTORECHART + "/"+reportName;
     private String requests;
     private String failures;
     private String medianRT;
@@ -47,8 +48,12 @@ public class LocustBarChart {
 		return maxRT;
 	}
 
+    public String getReportName() {
+    	return this.reportName;
+    }
+    
 	public void createChart(int testResultsIteration) {
-    	File file = new File(FILEPATH);
+    	File file = new File(filePath);
         this.setRequestResults(testResultsIteration);
         chart = ChartFactory.createBarChart(TITLE,CATEGORYAXISLABELTITLE,VALUEAXISLABELTITLE, createDataset(testResultsIteration), PlotOrientation.VERTICAL,false,true,false);
         chart.addSubtitle(0, new TextTitle(" "));

@@ -100,10 +100,9 @@ public class LocustOperations {
     }
     
     public Boolean checkMinResponseTime(DataTable testData) {
-    	LocustBarChart locustBarChart = new LocustBarChart();
-    	locustBarChart.createChart(0);
+    	LocustReportReader locustReportReader = new LocustReportReader();
     	Boolean higher = false;
-    	if (Long.parseLong(locustBarChart.getMaxRT())>Long.parseLong(auxiliar.getDataTableValue(testData, "Expected Time"))){
+    	if (Long.parseLong(locustReportReader.getLocustRequestDataList().get(0).getMaxResponseTime())>Long.parseLong(auxiliar.getDataTableValue(testData, "Expected Time"))){
     		higher = true;
     	};
     	return higher;

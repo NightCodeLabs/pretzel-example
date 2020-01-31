@@ -1,8 +1,11 @@
 package runner;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import com.cucumber.listener.Reporter;
@@ -19,6 +22,11 @@ import cucumber.api.junit.Cucumber;
 )
 
 public class TestRunner {
+	
+		@BeforeClass
+		public static void cleanLocustChartsDirectory() throws IOException {
+			FileUtils.cleanDirectory(new File("target/cucumber-reports/locustcharts"));
+		}
 
 	    @AfterClass
 	    public static void writeExtentReport() {
