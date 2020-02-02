@@ -1,10 +1,8 @@
 package performance;
-import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
-
-import org.junit.Assert;
 
 import helpers.AuxiliarMethods;
 
@@ -12,7 +10,6 @@ import com.github.myzhan.locust4j.AbstractTask;
 import com.github.myzhan.locust4j.Locust;
 
 import cucumber.api.DataTable;
-import graph.LocustBarChart;
 
 public class LocustOperations {
 
@@ -31,7 +28,6 @@ public class LocustOperations {
     private long maxRPS;
     private int weight;
     private int testTime;
-    private Process process;
 
 	Locust locust = Locust.getInstance();
 	AuxiliarMethods auxiliar = new AuxiliarMethods();
@@ -69,17 +65,16 @@ public class LocustOperations {
 	 * This method raise the master with the parameters of the test defined in cucumber
 	 */
     public void executeMaster() {
+        Process process;
         String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
         String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
 
         if (OPERATING_SYSTEM.indexOf("win") >= 0) {
-
-        command = "cmd.exe /c start /MIN locust.exe " + command;
-           }
-        else {
-        command= "locust " + command;
+        	command = "cmd.exe /c start /MIN locust.exe " + command;
+        } else {
+        	command= "locust " + command;
         }
-          try {
+        try {
         	process = Runtime.getRuntime().exec(command);
         } catch (IOException error) {
            System.out.println(error.getMessage());

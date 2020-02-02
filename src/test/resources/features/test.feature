@@ -11,5 +11,5 @@ Feature: Locust Performance Test YESNO Api
 
     Examples:
       |Max Users Load|Users Load Per Second | Test Time | Max RPS |Task            | Expected Time |
-      |1             |                   1  |          1|        1|YesNoApi		 		 |           1000|
-      |2             |                   2  |          1|        2|YesNoApi2	 		 |           1000|
+      |1             |                   1  |          1|        1|YesNoApi		 		 |           2000|
+      |2             |                   2  |          1|        2|YesNoApi2	 		 |           2000|

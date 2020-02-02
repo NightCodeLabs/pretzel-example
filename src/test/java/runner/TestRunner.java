@@ -25,9 +25,9 @@ public class TestRunner {
 	
 		@BeforeClass
 		public static void cleanLocustChartsDirectory() throws IOException {
+			//Delete and create the locustcharts folder in order to ensure that exists in every execution
 			FileUtils.deleteDirectory(new File("target/cucumber-reports/locustcharts"));			
 			FileUtils.forceMkdir(new File("target/cucumber-reports/locustcharts"));			
-			//FileUtils.cleanDirectory(new File("target/cucumber-reports/locustcharts"));
 		}
 
 	    @AfterClass

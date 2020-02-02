@@ -16,7 +16,6 @@ public class Example {
 		locustOperations = new LocustOperations();
 		locustOperations.executePerformanceTask(arg1);
 	}
-	
 
 	@Then("^The answer is returned within the expected time$")
 	public void the_answer_is_returned_within_the_expected_time(DataTable testData) throws Throwable {

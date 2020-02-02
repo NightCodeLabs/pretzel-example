@@ -33,6 +33,15 @@ public class LocustReportReader {
         this.locustRequestDataList = getLocustRequestData();
         this.locustDistributionDataList = getLocustDistributionData();
     }
+    
+
+    public List<LocustRequestData> getLocustRequestDataList() {
+        return this.locustRequestDataList;
+    }
+
+    public List<LocustDistributionData> getLocustDistributionDataList() {
+        return this.locustDistributionDataList;
+    }
 
     private List<LocustRequestData> getLocustRequestData() {
         try {
@@ -50,14 +59,6 @@ public class LocustReportReader {
         } catch (IOException | ParseException e) {
             throw new RuntimeException(ERROR);
         }
-    }
-
-    public List<LocustRequestData> getLocustRequestDataList() {
-        return this.locustRequestDataList;
-    }
-
-    public List<LocustDistributionData> getLocustDistributionDataList() {
-        return this.locustDistributionDataList;
     }
 	
 

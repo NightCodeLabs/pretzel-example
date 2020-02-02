@@ -12,7 +12,6 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import helpers.FileOperations;
 import performance.LocustReportReader;
 
 public class LocustBarChart {
@@ -25,39 +24,25 @@ public class LocustBarChart {
     private static final String ABSOLUTEPATHTOSTORECHART = Paths.get("target/cucumber-reports/locustcharts/").toFile().getAbsolutePath();
     private static final String ERROR = "ERROR CREATING THE GRAPH";
     
-    private String reportName = "performanceChart"+System.currentTimeMillis()+".png";
-    private String filePath = ABSOLUTEPATHTOSTORECHART + "/"+reportName;
-    private String requests;
-    private String failures;
-    private String medianRT;
-    private String averageRT;
-    private String minRT;
-    private String maxRT;
-    private String requestPS;    
-    private String requestResults;
+    private String fileName;
+
+    public String getFileName() {
+    	return this.fileName;
+    }    
     
-	private JFreeChart chart;
-	private DefaultCategoryDataset dataset;
-	
-	FileOperations fileOperations = new FileOperations();
-	LocustReportReader locustReportReader = new LocustReportReader();
-	
-
-
-    public String getMaxRT() {
-		return maxRT;
-	}
-
-    public String getReportName() {
-    	return this.reportName;
-    }
-    
+    /**
+     * Create the chart according to the csv perfromance results
+     * @param testResultsIteration the index of the csv results in case of the csv contains more than one line results
+     */
 	public void createChart(int testResultsIteration) {
-    	File file = new File(filePath);
-        this.setRequestResults(testResultsIteration);
-        chart = ChartFactory.createBarChart(TITLE,CATEGORYAXISLABELTITLE,VALUEAXISLABELTITLE, createDataset(testResultsIteration), PlotOrientation.VERTICAL,false,true,false);
+		this.fileName = "performanceChart"+System.currentTimeMillis()+".png";
+    	File file = new File(ABSOLUTEPATHTOSTORECHART+"/"+this.fileName);
+    	System.out.println("inside createChart: "+ file.getAbsolutePath());
+		LocustReportReader locustReportReader = new LocustReportReader();
+        //this.setRequestResults(locustReportReader, testResultsIteration);
+        JFreeChart chart = ChartFactory.createBarChart(TITLE,CATEGORYAXISLABELTITLE,VALUEAXISLABELTITLE, createDataset(locustReportReader, testResultsIteration), PlotOrientation.VERTICAL,false,true,false);
         chart.addSubtitle(0, new TextTitle(" "));
-        chart.addSubtitle(1, new TextTitle(getRequestResults()));
+        chart.addSubtitle(1, new TextTitle(this.createRequestResults(locustReportReader, testResultsIteration)));
         chart.addSubtitle(2, new TextTitle(" "));
         try {
             ChartUtils.saveChartAsPNG(file, chart, CHARTWIDTH, CHARTHEIGHT);
@@ -66,9 +51,15 @@ public class LocustBarChart {
             System.out.println(ERROR);
         }
     }
-
-    private CategoryDataset createDataset(int testResultsIteration) {
-        dataset = new DefaultCategoryDataset();
+	
+	/**
+	 * Creates the dataset for the distribution of load
+	 * @param locustReportReader the instance of the csv reader
+	 * @param testResultsIteration the index of the csv results in case of the csv contains more than one line results
+	 * @return it returns the dataset to be used in the public createChart method
+	 */
+    private CategoryDataset createDataset(LocustReportReader locustReportReader, int testResultsIteration) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.setValue(Integer.parseInt(locustReportReader.getLocustDistributionDataList().get(testResultsIteration).get50()), "Requests", "50%");
         dataset.setValue(Integer.parseInt(locustReportReader.getLocustDistributionDataList().get(testResultsIteration).get66()), "Requests", "66%");
         dataset.setValue(Integer.parseInt(locustReportReader.getLocustDistributionDataList().get(testResultsIteration).get75()), "Requests", "75%");
@@ -80,20 +71,23 @@ public class LocustBarChart {
         dataset.setValue(Integer.parseInt(locustReportReader.getLocustDistributionDataList().get(testResultsIteration).get100()), "Requests", "100%");
         return dataset;
     }
-
-    private String getRequestResults(){
-        return requestResults;  
-    }
     
-    private void setRequestResults(int testResultsIteration) {
-    	requests= locustReportReader.getLocustRequestDataList().get(testResultsIteration).getRequests();
-        failures=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getFailures();
-        medianRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getMedianResponseTime();
-        averageRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getAverageResponseTime();
-        minRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getMinResponseTime();
-        maxRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getMaxResponseTime();
-        requestPS=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getRequestsS();
-        requestResults = "# Requests: "+ requests + "      # Failures: " + failures +"      Median: "+medianRT+"      Average: "+averageRT+"      Min RT: "+minRT+"      Max RT: "+maxRT+"      Requests/s: "+requestPS; 
+    /**
+     * It generate the information of the performance results
+     * @param locustReportReader the instance of the csv reader
+     * @param testResultsIteration the index of the csv results in case of the csv contains more than one line results
+     */
+    private String createRequestResults(LocustReportReader locustReportReader, int testResultsIteration) {
+    	String requests= locustReportReader.getLocustRequestDataList().get(testResultsIteration).getRequests();
+        String failures=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getFailures();
+        String medianRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getMedianResponseTime();
+        String averageRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getAverageResponseTime();
+        String minRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getMinResponseTime();
+        String maxRT=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getMaxResponseTime();
+        String requestPS=locustReportReader.getLocustRequestDataList().get(testResultsIteration).getRequestsS();
+        String requestResults = "# Requests: "+ requests + "      # Failures: " + failures +"      Median: "+medianRT+"      Average: "+averageRT+"      Min RT: "+minRT+"      Max RT: "+maxRT+"      Requests/s: "+requestPS; 
+        return requestResults;
     }
+
 
 }
