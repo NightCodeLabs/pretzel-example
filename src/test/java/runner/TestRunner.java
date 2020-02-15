@@ -1,9 +1,7 @@
 package runner;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -11,6 +9,8 @@ import org.junit.runner.RunWith;
 import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
+import helpers.ConfigReader;
+import helpers.FileOperations;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -24,16 +24,15 @@ import cucumber.api.junit.Cucumber;
 public class TestRunner {
 	
 		@BeforeClass
-		public static void cleanLocustChartsDirectory() throws IOException {
+		public static void cleanLocustChartsDirectory() {
 			//Delete and create the locustcharts folder in order to ensure that exists in every execution
-			FileUtils.deleteDirectory(new File("target/cucumber-reports/locustcharts"));			
-			FileUtils.forceMkdir(new File("target/cucumber-reports/locustcharts"));			
+			FileOperations.getInstance().initialiseChartsFolder(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getChartPath()));
 		}
 
 	    @AfterClass
 	    public static void writeExtentReport() {
 	        try {
-	            Reporter.loadXMLConfig(new File("src/main/resources/configs/extent-config.xml"));
+	            Reporter.loadXMLConfig(new File(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getExtentReportConfigPath())));
 
 	        } catch (NoSuchMethodError ex){
 	            System.out.println(ex.getMessage());

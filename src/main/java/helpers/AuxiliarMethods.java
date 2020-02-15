@@ -8,6 +8,14 @@ import cucumber.api.DataTable;
 
 public class AuxiliarMethods {
 	
+	private static AuxiliarMethods auxiliarMethods = new AuxiliarMethods();
+	
+	private AuxiliarMethods() {}
+	
+	public static AuxiliarMethods getInstance() {
+		return auxiliarMethods;
+	}
+	
     public String getDataTableValue(DataTable dataTable, String keyToSearch){   	
         String value = null;
         List<Map<String,String>> dataList = dataTable.asMaps(String.class, String.class);

@@ -142,6 +142,12 @@
   			<artifactId>slf4j-log4j12</artifactId>
   			<version>1.7.28</version>
 		</dependency>
+    	
+    	<dependency>
+    		<groupId>com.opencsv</groupId>
+    		<artifactId>opencsv</artifactId>
+    		<version>4.1</version>
+		</dependency>
 
 </dependencies>
 

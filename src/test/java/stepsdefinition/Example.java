@@ -19,11 +19,8 @@ public class Example {
 
 	@Then("^The answer is returned within the expected time$")
 	public void the_answer_is_returned_within_the_expected_time(DataTable testData) throws Throwable {
-		Assert.assertFalse(locustOperations.checkMinResponseTime(testData));
+		Assert.assertFalse(locustOperations.checkMaxResponseTime(testData));
 	}
-
-
-
 
 
 }

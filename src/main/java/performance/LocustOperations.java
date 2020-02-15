@@ -1,10 +1,12 @@
 package performance;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import helpers.AuxiliarMethods;
+import helpers.ConfigReader;
+import helpers.FileOperations;
 
 import com.github.myzhan.locust4j.AbstractTask;
 import com.github.myzhan.locust4j.Locust;
@@ -15,10 +17,8 @@ public class LocustOperations {
 
 	private static final String TASKPACKAGEPATH = "locustTask";
 	private static final String NAMEOFREPORT = "performanceResults";
-	private static final String MASTERFILELOCATION = "src/main/resources/performance/locust-master.py";
-    private static final String CSVLOCATION = "target/csvlocustsresults/";
-    private String masterFilePath = Paths.get(MASTERFILELOCATION).toFile().getAbsolutePath();
-    private String csvReportFilePath = Paths.get(CSVLOCATION).toFile().getAbsolutePath();
+    private String masterFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getLocustMasterFilePath());
+    private String csvReportFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath());
 
 	private String locustTask;
     private String master = "127.0.0.1";
@@ -29,18 +29,16 @@ public class LocustOperations {
     private int weight;
     private int testTime;
 
-	Locust locust = Locust.getInstance();
-	AuxiliarMethods auxiliar = new AuxiliarMethods();
-	
+	Locust locust = Locust.getInstance();	
 	/*
 	 * This method set the data defined in cucumber in the private variables
 	 */
 	public void setTestData(DataTable testData){
-        this.maxUsers=(Integer.parseInt(auxiliar.getDataTableValue(testData,"Max Users Load")));
-        this.usersLoadPerSecond=(Integer.parseInt(auxiliar.getDataTableValue(testData,"Users Load Per Second")));
-        this.testTime=(Integer.parseInt(auxiliar.getDataTableValue(testData,"Test Time")));
-        this.maxRPS = (Integer.parseInt((auxiliar.getDataTableValue(testData, "Max RPS"))));
-        this.weight=(Integer.parseInt((auxiliar.getDataTableValue(testData,"Max Users Load"))));
+        this.maxUsers=(Integer.parseInt(AuxiliarMethods.getInstance().getDataTableValue(testData,"Max Users Load")));
+        this.usersLoadPerSecond=(Integer.parseInt(AuxiliarMethods.getInstance().getDataTableValue(testData,"Users Load Per Second")));
+        this.testTime=(Integer.parseInt(AuxiliarMethods.getInstance().getDataTableValue(testData,"Test Time")));
+        this.maxRPS = (Integer.parseInt((AuxiliarMethods.getInstance().getDataTableValue(testData, "Max RPS"))));
+        this.weight=(Integer.parseInt((AuxiliarMethods.getInstance().getDataTableValue(testData,"Max Users Load"))));
     }
 	
 	/* 
@@ -56,7 +54,7 @@ public class LocustOperations {
 	 * This method execute the task specified in cucumber
 	 */
 	public void executeTask(DataTable data) throws Exception {
-       this.locustTask=TASKPACKAGEPATH+"." + auxiliar.getDataTableValue(data,"Task");
+       this.locustTask=TASKPACKAGEPATH+"." + AuxiliarMethods.getInstance().getDataTableValue(data,"Task");
        Class<?> nameClass = Class.forName(locustTask);
        locust.run((AbstractTask) nameClass.getConstructor(Integer.class).newInstance(this.weight));
    }
@@ -94,15 +92,33 @@ public class LocustOperations {
         locust.stop();
     }
     
-    public Boolean checkMinResponseTime(DataTable testData) {
-    	LocustReportReader locustReportReader = new LocustReportReader();
+    public Boolean checkMaxResponseTime(DataTable testData) {
     	Boolean higher = false;
-    	if (Long.parseLong(locustReportReader.getLocustRequestDataList().get(0).getMaxResponseTime())>Long.parseLong(auxiliar.getDataTableValue(testData, "Expected Time"))){
-    		higher = true;
-    	};
+    	List<String[]> data = FileOperations.getInstance().readCSV(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getRequestReportPath()));    	
+    	try {
+			if (this.getMaxResponseTime(data, (data.size()-1))>Long.parseLong(AuxiliarMethods.getInstance().getDataTableValue(testData, "Expected Time"))){
+				higher = true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		};
     	return higher;
     }  
 	
+    public Long getMaxResponseTime(List<String[]> data, int testResultsIteration) throws Exception {
+    	int position = 555;
+    	for (int i= 2; i<data.get(0).length; i++) {
+    		if((data.get(0)[i]).equals("Max response time")) {
+    			position = i;
+    		}   		
+    	}    	
+    	if(position == 555) {
+    		throw new Exception ("The Max response time can't be found");
+    	} else {
+    		return Long.parseLong(data.get(testResultsIteration)[position]);
+    	}
+    }
+    
     
     
 	
