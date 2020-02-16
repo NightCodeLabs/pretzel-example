@@ -3,7 +3,7 @@ package stepsdefinition;
 import java.io.File;
 import java.io.IOException;
 
-import com.cucumber.listener.Reporter;
+import com.vimalselvam.cucumber.listener.Reporter;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

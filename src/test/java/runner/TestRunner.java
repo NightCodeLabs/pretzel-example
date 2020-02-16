@@ -1,7 +1,6 @@
 package runner;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -9,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cucumber.listener.Reporter;
+import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import helpers.ConfigReader;
@@ -20,7 +19,7 @@ import helpers.FileOperations;
         features = "src/test/resources/features",
         glue={"stepsdefinition"},
         //tags = {""},
-        plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
+        plugin = {"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
         monochrome = true
 )
 
@@ -38,7 +37,7 @@ public class TestRunner {
 	    public static void writeExtentReport() {
 	        try {
 	            Reporter.loadXMLConfig(new File(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getExtentReportConfigPath())));
-	        } catch (NoSuchMethodError ex){	        	
+	        } catch (NoSuchMethodError ex){
 	            logger.error("Something went wrong writting in the Extent Report");
 	        }
 

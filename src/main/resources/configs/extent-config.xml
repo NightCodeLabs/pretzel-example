@@ -2,13 +2,16 @@
 <!DOCTYPE extentreports>
 <extentreports>
     <configuration>
-        <!-- report theme --> <!-- standard, dark -->
+        <!-- report theme --> 
+        <!-- standard, dark -->
         <theme>standard</theme>
 
-        <!-- document encoding -->  <!-- defaults to UTF-8 -->
+        <!-- document encoding -->
+        <!-- defaults to UTF-8 -->
         <encoding>UTF-8</encoding>
 
-        <!-- protocol for script and stylesheets -->   <!-- defaults to https -->
+        <!-- protocol for script and stylesheets -->
+        <!-- defaults to https -->
         <protocol>https</protocol>
 
         <!-- title of the document -->
@@ -17,10 +20,12 @@
         <!-- report name - displayed at top-nav -->
         <reportName>Report</reportName>
 
-        <!-- global date format override -->  <!-- defaults to yyyy-MM-dd -->
+        <!-- global date format override -->
+        <!-- defaults to yyyy-MM-dd -->
         <dateFormat>yyyy-MM-dd</dateFormat>
 
-        <!-- global time format override -->   <!-- defaults to HH:mm:ss -->
+        <!-- global time format override -->
+        <!-- defaults to HH:mm:ss -->
         <timeFormat>HH:mm:ss</timeFormat>
 
         <!-- custom javascript -->
