@@ -4,16 +4,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cucumber.api.DataTable;
 
 public class AuxiliarMethods {
 	
-	private static AuxiliarMethods auxiliarMethods = new AuxiliarMethods();
+	private static final Logger logger = LoggerFactory.getLogger(AuxiliarMethods.class);
+	
+	private static AuxiliarMethods _instance = new AuxiliarMethods();
 	
 	private AuxiliarMethods() {}
 	
 	public static AuxiliarMethods getInstance() {
-		return auxiliarMethods;
+		return _instance;
 	}
 	
     public String getDataTableValue(DataTable dataTable, String keyToSearch){   	
@@ -27,7 +32,7 @@ public class AuxiliarMethods {
         	}
         }        
         if (value==null) {
-            System.out.println("The key doesn't exists");
+        	logger.error("The key doesn't exists");
         }
         
         return value;

@@ -13,22 +13,23 @@ import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.opencsv.CSVReader;
 
 public class FileOperations {
 
-	private static FileOperations fileOperations = new FileOperations();
+	private static final Logger logger = LoggerFactory.getLogger(FileOperations.class);
+	private static FileOperations _instance = new FileOperations();
 	
 	private FileOperations() {}
 	
 	public static FileOperations getInstance() {
-		return fileOperations;
+		return _instance;
 	}
 	
     public JSONArray CSVToJson(String csvPath) throws IOException, ParseException {
@@ -46,8 +47,6 @@ public class FileOperations {
 
         JSONArray jsonObject = (JSONArray) parser.parse(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(readAll));
 
-        System.out.print(jsonObject.toString());
-
         return jsonObject;
     }
     
@@ -63,9 +62,9 @@ public class FileOperations {
 		}
 		csvReader.close();
 		}catch (FileNotFoundException e) {
-			System.out.println("Something went wrong reading the CSV Report file");
+			logger.error("Something went wrong reading the CSV Report file");
 		} catch (IOException e) {
-			System.out.println("Something went wrong reading the CSV Report file");
+			logger.error("Something went wrong reading the CSV Report file");
 		}
 		
     	return list;
@@ -81,7 +80,7 @@ public class FileOperations {
 		  FileUtils.deleteDirectory(new File(path));
 		  FileUtils.forceMkdir(new File(path));
 	  } catch (IOException e) {
-		  System.out.println("Something went wrong initialising the charts directory");
+		  logger.error("Something went wrong initialising the charts directory");
 	  }			
    }
     

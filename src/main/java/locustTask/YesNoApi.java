@@ -1,6 +1,8 @@
 package locustTask;
 
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //import org.junit.Assert;
 
@@ -15,6 +17,8 @@ import io.restassured.specification.RequestSpecification;
 
 
 public class YesNoApi extends AbstractTask  {
+	
+	private static final Logger logger = LoggerFactory.getLogger(YesNoApi.class);
 
 	private int weight;
 
@@ -46,8 +50,8 @@ public class YesNoApi extends AbstractTask  {
    		 	Assert.assertEquals("Correct answer returned",  "yes", answer.getString("answer"));        	
             Locust.getInstance().recordSuccess("GET", getName(), response.getTime(), 1);
         }catch (AssertionError | Exception error){
-            error.getMessage();
             Locust.getInstance().recordFailure("GET",getName(), response.getTime(),"Yes has not been returned");
+            logger.info("Something went wrong in the request");
         }
     
     }

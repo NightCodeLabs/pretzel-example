@@ -11,6 +11,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import helpers.ConfigReader;
 import helpers.FileOperations;
@@ -18,6 +20,7 @@ import helpers.FileOperations;
 
 public class LocustBarChart {
 		
+	private static final Logger logger = LoggerFactory.getLogger(LocustBarChart.class);
 	private static final String TITLE = "Performance Execution Results";
     private static final String CATEGORYAXISLABELTITLE = "Load Distribution";
     private static final String VALUEAXISLABELTITLE = "Requests";
@@ -45,8 +48,7 @@ public class LocustBarChart {
         try {
             ChartUtils.saveChartAsPNG(file, chart, CHARTWIDTH, CHARTHEIGHT);
         } catch (IOException error) {
-            System.out.println(error.getMessage());
-            System.out.println(ERROR);
+            logger.error(ERROR);
         }
     }
     

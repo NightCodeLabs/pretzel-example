@@ -9,11 +9,10 @@ import performance.LocustOperations;
 
 public class Example {
 
-	LocustOperations locustOperations;
+	LocustOperations locustOperations = new LocustOperations();
 
 	@Given("^Multiple users are requesting for a forced answer$")
 	public void multiple_users_are_requesting_for_a_forced_answer(DataTable arg1) throws Throwable {
-		locustOperations = new LocustOperations();
 		locustOperations.executePerformanceTask(arg1);
 	}
 

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import helpers.AuxiliarMethods;
 import helpers.ConfigReader;
 import helpers.FileOperations;
@@ -14,11 +17,12 @@ import com.github.myzhan.locust4j.Locust;
 import cucumber.api.DataTable;
 
 public class LocustOperations {
-
+	
 	private static final String TASKPACKAGEPATH = "locustTask";
 	private static final String NAMEOFREPORT = "performanceResults";
-    private String masterFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getLocustMasterFilePath());
-    private String csvReportFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath());
+	private static final Logger logger = LoggerFactory.getLogger(LocustOperations.class);
+	private static String masterFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getLocustMasterFilePath());
+    private static String csvReportFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath());
 
 	private String locustTask;
     private String master = "127.0.0.1";
@@ -29,7 +33,7 @@ public class LocustOperations {
     private int weight;
     private int testTime;
 
-	Locust locust = Locust.getInstance();	
+	private Locust locust = Locust.getInstance();	
 	/*
 	 * This method set the data defined in cucumber in the private variables
 	 */
@@ -75,23 +79,35 @@ public class LocustOperations {
         try {
         	process = Runtime.getRuntime().exec(command);
         } catch (IOException error) {
-           System.out.println(error.getMessage());
+        	logger.error("Something went wrong executing the master");
         }
     }
+    
+    //This method clear all the values;
+	private void clearValues() {
+		this.locustTask = "";
+		this.maxUsers = 0;
+		this.usersLoadPerSecond = 0;
+		this.maxRPS = 0;
+		this.weight = 0;
+		this.testTime=0;
+	}
     
     /*
      * This method execute the sequence needed for run the test
      */
     public void executePerformanceTask(DataTable testData) throws Exception {
-        setTestData(testData);
-        executeMaster();
+        this.setTestData(testData);
+        this.executeMaster();
         TimeUnit.SECONDS.sleep(10);
-        setUpSlave();
-        executeTask(testData);
+        this.setUpSlave();
+        this.executeTask(testData);
         TimeUnit.MINUTES.sleep(this.testTime);
-        locust.stop();
+        this.locust.stop();
+        this.clearValues();
     }
     
+    //It returns true or false if the Max response time is higher or not than the expected 
     public Boolean checkMaxResponseTime(DataTable testData) {
     	Boolean higher = false;
     	List<String[]> data = FileOperations.getInstance().readCSV(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getRequestReportPath()));    	
@@ -100,12 +116,13 @@ public class LocustOperations {
 				higher = true;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			logger.error("Something went wrong cheking the MaxResponseTime");
 		};
     	return higher;
     }  
 	
-    public Long getMaxResponseTime(List<String[]> data, int testResultsIteration) throws Exception {
+    //It returns the Max Response Time of the report
+    private Long getMaxResponseTime(List<String[]> data, int testResultsIteration) throws Exception {
     	int position = 555;
     	for (int i= 2; i<data.get(0).length; i++) {
     		if((data.get(0)[i]).equals("Max response time")) {
@@ -113,6 +130,7 @@ public class LocustOperations {
     		}   		
     	}    	
     	if(position == 555) {
+    		logger.warn("The Max response time can't be found");
     		throw new Exception ("The Max response time can't be found");
     	} else {
     		return Long.parseLong(data.get(testResultsIteration)[position]);

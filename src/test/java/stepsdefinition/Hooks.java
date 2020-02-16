@@ -2,7 +2,6 @@ package stepsdefinition;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import com.cucumber.listener.Reporter;
 
