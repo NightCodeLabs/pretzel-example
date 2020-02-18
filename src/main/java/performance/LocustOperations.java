@@ -123,13 +123,13 @@ public class LocustOperations {
 	
     //It returns the Max Response Time of the report
     private Long getMaxResponseTime(List<String[]> data, int testResultsIteration) throws Exception {
-    	int position = 555;
+    	int position = 0;
     	for (int i= 2; i<data.get(0).length; i++) {
     		if((data.get(0)[i]).equals("Max response time")) {
     			position = i;
     		}   		
     	}    	
-    	if(position == 555) {
+    	if(position == 0) {
     		logger.warn("The Max response time can't be found");
     		throw new Exception ("The Max response time can't be found");
     	} else {
