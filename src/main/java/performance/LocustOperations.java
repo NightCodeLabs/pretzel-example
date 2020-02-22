@@ -66,7 +66,8 @@ public class LocustOperations {
 	/*
 	 * This method raise the master with the parameters of the test defined in cucumber
 	 */
-    public void executeMaster() {
+    @SuppressWarnings("unused")
+	public void executeMaster() {
         Process process;
         String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
         String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
