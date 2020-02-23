@@ -75,13 +75,28 @@ public class FileOperations {
 	   return Paths.get(path).toFile().getAbsolutePath();
    }
    
-   public void initialiseChartsFolder(String path) {
+
+   public void folderInitialisation(String pathChartFolder, String pathCsvFolder) {
+	   this.initialiseChartsFolder(pathChartFolder);
+	   this.initialiseCsvFolder(pathCsvFolder);
+   }
+   
+   private void initialiseChartsFolder(String path) {
 	  try {
 		  FileUtils.deleteDirectory(new File(path));
 		  FileUtils.forceMkdir(new File(path));
 	  } catch (IOException e) {
 		  logger.error("Something went wrong initialising the charts directory");
 	  }			
+   }
+   
+   private void initialiseCsvFolder(String path) {
+	   try {
+			  FileUtils.deleteDirectory(new File(path));
+			  FileUtils.forceMkdir(new File(path));
+		  } catch (IOException e) {
+			  logger.error("Something went wrong initialising the csv directory");
+		  }		
    }
     
 	
