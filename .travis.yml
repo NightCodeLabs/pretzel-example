@@ -4,4 +4,4 @@ services:
   - docker
 
 script:
-  - docker-compose --build -d
+  - docker-compose up --build -d
