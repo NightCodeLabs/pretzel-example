@@ -1,4 +1,4 @@
-FROM grubykarol/locust:0.10.0-python3.6-alpine3.9
+FROM grubykarol/locust:0.13.5-python3.8-alpine3.11
 
 USER root
 
@@ -13,6 +13,10 @@ ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openj
 
 # Install Maven
 RUN apk add maven
+
+#Install locustio
+
+RUN pip install locustio
 
 # Copy the files from the machine
 
