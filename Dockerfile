@@ -1,4 +1,4 @@
-FROM grubykarol/locust:0.13.5-python3.8-alpine3.11
+FROM grubykarol/locust:0.11.0-python3.7-alpine3.9
 
 # Install OpenJDK-8
 RUN apk update
@@ -11,6 +11,9 @@ ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openj
 
 # Install Maven
 RUN apk add maven
+
+# Needed for the report
+RUN apk --update add fontconfig ttf-dejavu
 
 # Copy the files from the machine
 RUN mkdir locustapitest
