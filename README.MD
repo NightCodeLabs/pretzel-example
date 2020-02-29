@@ -1,24 +1,54 @@
-# Locust Api Test
+# Locust Api Test  
+[![Build Status](https://travis-ci.com/cucumber-locust4j/locustapitest.svg?branch=master)](https://travis-ci.com/cucumber-locust4j/locustapitest)
+# Purpose  
+Teams use BDD to drive development based on the user behaviour, but stories never go beyond a single user, defects are found very late within development or even in production and there are no service level agreements, only actual user behaviour!  
+We need an easy, reusable way to tackle this, which would enable our development teams to drive load and performance testing into their day-to-day activities: from requirements gathering, to test automation as well as having part of the delivery pipeline, reusing the existing Java, RestAssured and Cucumber tests.
+  
+## Installation guide  
+### Containerized Execution  
+- Install docker in your machine
+- Run
+ ```  
+  $ docker-compose up --build -d
+ ``` 
 
-## Installation guide
-### Windows
-1. Install JDK  
-2. Install python  
-3. Install IDE  
-4. Install Visual Studio Code / Build Tools for C++ (Doesn't work without)   
-5. pip install locustio  
-6. add locustio to your env. path  
-7. restart cmd  
-8. install maven
-9. maven install the project   
-
-### Linux
-1. Install JDK
-2. sudo apt install pip    
-3. pip install locustio  
-4. vi  ~/.bash rc
-5. export PATH=$PATH:~/.local/bin
-7. restart terminal  
-8. sudo apt install maven
-9. maven install the project   
-
+### Local execution  
+#### Windows  
+- Install latest JDK  
+- Install python   
+- Install Visual Studio Code / Build Tools for C++ (Yeah, locustio doesn't really work without these build tools because a weird dependency)      
+- In command line run:  
+ ```  
+  $ pip install locustio  
+ ```  
+- Add locustio to your env. path  
+- Restart cmd  
+- Install maven
+- In command line run:   
+ ```  
+  $ mvn install  
+ ```  
+#### Linux  
+- Install JDK  
+- Install Python:  
+ ```  
+  $ sudo apt install pip 
+ ```  
+- Install Locustio:  
+ ```  
+  $ pip install locustio  
+ ```    
+- Add Locustio to env path:  
+```  
+  $ vi  ~/.bash_rc  
+  $ export PATH=$PATH:~/.local/bin
+   ```  
+- restart terminal  
+- Install maven:  
+```  
+  $ sudo apt install maven
+   ```  
+- In command line run:   
+ ```  
+  $ mvn install  
+ ```   
