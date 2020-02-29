@@ -40,10 +40,10 @@ public class LocustBarChart {
      */
 	public void createChart() {
 		this.fileName = "performanceChart"+System.currentTimeMillis()+".png";
-    	File file = new File(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getChartPath())+"/"+this.fileName);
-        JFreeChart chart = ChartFactory.createBarChart(TITLE,CATEGORYAXISLABELTITLE,VALUEAXISLABELTITLE, createDataset(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getDistributionReportPath())), PlotOrientation.VERTICAL,false,true,false);
+		File file = new File(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getChartPath())+"/"+this.fileName);
+        JFreeChart chart = ChartFactory.createBarChart(TITLE,CATEGORYAXISLABELTITLE,VALUEAXISLABELTITLE, createDataset(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getStatsReportPath())), PlotOrientation.VERTICAL,false,true,false);
         chart.addSubtitle(0, new TextTitle(" "));
-        chart.addSubtitle(1, new TextTitle(this.createRequestResults(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getRequestReportPath()))));
+        chart.addSubtitle(1, new TextTitle(this.createRequestResults(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getStatsReportPath()))));
         chart.addSubtitle(2, new TextTitle(" "));
         try {
             ChartUtils.saveChartAsPNG(file, chart, CHARTWIDTH, CHARTHEIGHT);
@@ -55,7 +55,7 @@ public class LocustBarChart {
     private CategoryDataset createDataset(String path){
     	DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     	List<String[]> datasetData = FileOperations.getInstance().readCSV(path);
-    	for (int i= 2; i<datasetData.get((datasetData.size()-1)).length; i++) {
+    	for (int i= 11; i<datasetData.get((datasetData.size()-1)).length; i++) {
     		dataset.setValue(Integer.parseInt(datasetData.get((datasetData.size()-1))[i]), "Requests", datasetData.get(0)[i]);    		
     	}
     	return dataset;
@@ -64,8 +64,9 @@ public class LocustBarChart {
     private String createRequestResults(String path){
     	List<String[]> requestData = FileOperations.getInstance().readCSV(path);
     	String requestResults = "";
-    	for (int i=2; i<requestData.get((requestData.size()-1)).length; i++) {
+    	for (int i=2; i<(requestData.get((requestData.size()-1)).length-12); i++) {
     		requestResults += requestData.get(0)[i]+": "+requestData.get((requestData.size()-1))[i]+"  |  ";
+    		
     	}
     	return requestResults;
     }   

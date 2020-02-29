@@ -99,6 +99,7 @@ public class LocustOperations {
      */
     public void executePerformanceTask(DataTable testData) throws Exception {
         this.setTestData(testData);
+        TimeUnit.SECONDS.sleep(5);
         this.executeMaster();
         TimeUnit.SECONDS.sleep(10);
         this.setUpSlave();
@@ -111,7 +112,7 @@ public class LocustOperations {
     //It returns true or false if the Max response time is higher or not than the expected 
     public Boolean checkMaxResponseTime(DataTable testData) {
     	Boolean higher = false;
-    	List<String[]> data = FileOperations.getInstance().readCSV(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getRequestReportPath()));    	
+    	List<String[]> data = FileOperations.getInstance().readCSV(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getStatsReportPath()));    	
     	try {
 			if (this.getMaxResponseTime(data, (data.size()-1))>Long.parseLong(AuxiliarMethods.getInstance().getDataTableValue(testData, "Expected Time"))){
 				higher = true;
