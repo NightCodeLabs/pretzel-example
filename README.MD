@@ -19,7 +19,7 @@ We need an easy, reusable way to tackle this, which would enable our development
 - Install Visual Studio Code / Build Tools for C++ (Yeah, locustio doesn't really work without these build tools because a weird dependency)      
 - In command line run:  
  ```  
-  $ pip install locustio  
+  $ pip install locustio==0.13.5  
  ```  
 - Add locustio to your env. path  
 - Restart cmd  
@@ -36,7 +36,7 @@ We need an easy, reusable way to tackle this, which would enable our development
  ```  
 - Install Locustio:  
  ```  
-  $ pip install locustio  
+  $ pip install locustio==0.13.5   
  ```    
 - Add Locustio to env path:  
 ```  
