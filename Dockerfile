@@ -1,4 +1,4 @@
-FROM grubykarol/locust:0.11.0-python3.7-alpine3.9
+FROM grubykarol/locust:0.13.5-python3.8-alpine3.11
 
 # Install OpenJDK-8
 RUN apk update
