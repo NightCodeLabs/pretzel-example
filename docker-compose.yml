@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        REPORTFOLDERNAME: locustapitest
     container_name: locustapitest
 
     ports:

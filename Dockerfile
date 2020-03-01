@@ -24,12 +24,8 @@ WORKDIR /locustapitest
 RUN mvn install
 
 # Publish the Report // swap this part with your own Amazon S3 server or private hosting!
-RUN apk add ncftp
 RUN apk add zip unzip
 
 RUN mkdir /locust_report/
 RUN ls -la
 RUN zip -r /locust_report/report.zip ./target/cucumber-reports/
-
-RUN ncftpput -R -v -u "dlpuser@dlptest.com" -p "SzMf7rTE4pCrf9dV286GuNe4N" ftp.dlptest.com / /locust_report/ #redo
-RUN echo "The report is available in the next 30mins at: ftp://ftp.dlptest.com/locust_report/" #redo
