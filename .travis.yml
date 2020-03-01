@@ -9,6 +9,6 @@ script:
   - docker-compose up --build -d
 
 after_success:
-  - docker cp locustapitest:/locust-report/report.zip /
+  - docker cp locustapitest:/locustapitest/locust-report/report.zip /
   - ncftpput -R -v -u "dlpuser@dlptest.com" -p "SzMf7rTE4pCrf9dV286GuNe4N" ftp.dlptest.com / /locust_report/
   - echo "The report is available in the next 30mins at ftp://ftp.dlptest.com/locust_report/"
