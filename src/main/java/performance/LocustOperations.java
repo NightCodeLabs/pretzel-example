@@ -24,6 +24,7 @@ public class LocustOperations {
 	private static final Logger logger = LoggerFactory.getLogger(LocustOperations.class);
 	private static String masterFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getLocustMasterFilePath());
     private static String csvReportFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath());
+    private static String operatingSystem = System.getProperty("os.name").toLowerCase();
 
 	private String locustTask;
     private String master = "127.0.0.1";
@@ -70,10 +71,10 @@ public class LocustOperations {
     @SuppressWarnings("unused")
 	public void executeMaster() {
     	Process locustProcess;
-        String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
+        //String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
         String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
 
-        if (OPERATING_SYSTEM.indexOf("win") >= 0) {
+        if (operatingSystem.indexOf("win") >= 0) {
         	command = "cmd.exe /c start /MIN locust.exe " + command;
         } else {
         	command= "locust " + command;
@@ -113,16 +114,39 @@ public class LocustOperations {
         this.clearValues();
     }
     
-    public Boolean checkLocustService() throws IOException {
-    	Process process = Runtime.getRuntime().exec("tasklist");
-        Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
-        while(reader.hasNextLine()) {
+    @SuppressWarnings("resource")
+	public Boolean checkLocustService() {
+    	Process process;
+    	Scanner reader;
+    	//String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();    	 
+         try {
+        	 if (operatingSystem.indexOf("win") >= 0) {
+         		process = Runtime.getRuntime().exec("tasklist");
+              	
+              } else {
+             	 process = Runtime.getRuntime().exec("ps -few");
+              }
+        	 reader = new Scanner(process.getInputStream(), "UTF-8");
+        	 while(reader.hasNextLine()) {
+                 if(reader.nextLine().contains("locust"))
+                     return true;
+                 	//reader.close();
+         	}
+             //reader.close();
+             
+         } catch (IOException error) {
+         	logger.error("Something went wrong executing the master");
+         }
+    	return false;
+    	//Process process = Runtime.getRuntime().exec("tasklist");
+        //Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
+        /*while(reader.hasNextLine()) {
             if(reader.nextLine().contains("locust.exe"))
                 return true;
             	//reader.close();
     	}
         //reader.close();
-        return false;
+        return false;*/
     }
     
     //It returns true or false if the Max response time is higher or not than the expected 
