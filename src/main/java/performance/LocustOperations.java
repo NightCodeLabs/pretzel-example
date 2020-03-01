@@ -2,6 +2,7 @@ package performance;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -68,7 +69,7 @@ public class LocustOperations {
 	 */
     @SuppressWarnings("unused")
 	public void executeMaster() {
-        Process process;
+    	Process locustProcess;
         String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
         String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
 
@@ -78,7 +79,7 @@ public class LocustOperations {
         	command= "locust " + command;
         }
         try {
-        	process = Runtime.getRuntime().exec(command);
+        	locustProcess = Runtime.getRuntime().exec(command);
         } catch (IOException error) {
         	logger.error("Something went wrong executing the master");
         }
@@ -99,14 +100,29 @@ public class LocustOperations {
      */
     public void executePerformanceTask(DataTable testData) throws Exception {
         this.setTestData(testData);
-        TimeUnit.SECONDS.sleep(5);
+        //TimeUnit.SECONDS.sleep(10);
+        while (checkLocustService()){
+        	logger.info("Waiting to locust service to be stopped");
+        }
         this.executeMaster();
-        TimeUnit.SECONDS.sleep(10);
         this.setUpSlave();
+        //TimeUnit.SECONDS.sleep(10);
         this.executeTask(testData);
         TimeUnit.MINUTES.sleep(this.testTime);
         this.locust.stop();
         this.clearValues();
+    }
+    
+    public Boolean checkLocustService() throws IOException {
+    	Process process = Runtime.getRuntime().exec("tasklist");
+        Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
+        while(reader.hasNextLine()) {
+            if(reader.nextLine().contains("locust.exe"))
+                return true;
+            	//reader.close();
+    	}
+        //reader.close();
+        return false;
     }
     
     //It returns true or false if the Max response time is higher or not than the expected 
