@@ -30,12 +30,8 @@ public class ConfigReader {
 		}
 	}
 	
-	public String getRequestReportPath() {
-		return properties.getProperty("requestsReportLocation");
-	}
-	
-	public String getDistributionReportPath() {
-		return properties.getProperty("distributionReportLocation");
+	public String getStatsReportPath() {
+		return properties.getProperty("statsReportLocation");
 	}
 
 	public String getChartPath() {
