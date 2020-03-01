@@ -1,0 +1,20 @@
+[
+  {
+    "baseURI": "https://yesno.wtf/api",
+    "method": "GET",
+    "requestParams": "/?force=yes",
+    "expected": "yes",
+    "valuePath": "answer",
+    "name": "YesNo Api GET",
+    "contentLength": 1
+  },
+  {
+    "baseURI": "https://yesno.wtf/api",
+    "method": "GET",
+    "requestParams": "/?force=no",
+    "expected": "no",
+    "valuePath": "answer",
+    "name": "YesNo2 Api GET",
+    "contentLength": 1
+  }
+]
