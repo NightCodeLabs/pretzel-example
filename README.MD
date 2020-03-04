@@ -11,6 +11,10 @@ We need an easy, reusable way to tackle this, which would enable our development
  ```  
   $ docker-compose up --build -d
  ``` 
+- Copy Report  
+ ```  
+  $ docker cp locustapitest:/locustapitest/report.zip .
+ ``` 
 
 ### Local execution  
 #### Windows  

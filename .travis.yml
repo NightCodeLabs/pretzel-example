@@ -1,13 +1,8 @@
 language: ruby
+
 services:
-- docker
+  - docker
+
 script:
-- touch file.txt
-deploy:
-  provider: releases
-  api_key:
-    secure: qq1kjnO+H0cTbqjYdJMLJ7pqwhdevPu1/k9Q2ptojf+aBC7MMzN54QF0ZEvaB70JZtjpNV5TQUE2IjbGQO6Jxa1B7sXXQGfyJTKGeAqlYKEOZF8GkYWcu7+SUDD8lboDOCu+A+gZXZX9BJvDm9JXwJIzMqCD29AeSLnTOB7AIzzx0di8w0FkjNzZT1QX8tds0AOIuf5eiyk2k9iLWO/0NfLwlIJAvDOp2kq4vaN08/DAgvinxOEECNod8YLrogFYEML60UlphX61AUKiAe2Ez51VtBmtevvkE4CAk1qaBQaHkAi0rdo+Zl7yFL0+bI3/rTJh9KHj8lp/N3NHWRXCa1NUDMjvlTvjUAscT7bgzAwZVWTyNA+PGumWHylVyg373+h3EFDL4xofWfFz07l2zzdNkkwxh3ZKOiQz5tok+ZENEXRS/zc1x7aYQIj2B1GdskTnR1WMbx6ZOn6oLP+CLzFyA/yPAFaJaWTVTWxHQ876m5OPMEE/wx/XuqT28S52s1qLyh+lZL2jyT+1JB96o5fvz+/YTHH0id5LkQdXXCc5jkeWZaGiKwmE/fiJZmVBOOuqPpZUpJmg6vwabiVC7G/YSn9Ycx7Q7zALoIKbX1vnQx9nlmxb09/i5E2QZrA0csiMmCcnytezT+aykgrvPJrxeN7PCl+fzu3tmGgyDsM=
-  file: file.txt
-  on:
-    repo: cucumber-locust4j/locustapitest
-    branch: PublishingReport
+  - docker-compose up --build -d
+  - docker cp locustapitest:/locustapitest/report.zip .
