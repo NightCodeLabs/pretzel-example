@@ -12,5 +12,6 @@ script:
 
 after_success:
   - cat report.zip
-  - ncftpput -R -v -u "dlpuser@dlptest.com" -p "SzMf7rTE4pCrf9dV286GuNe4N" ftp.dlptest.com / report.zip
+  - curl -p - --insecure  "ftp.dlptest.com" --user "dlpuser@dlptest.com:SzMf7rTE4pCrf9dV286GuNe4N" -T "report.zip" --ftp-create-dirs
+#  - ncftpput -R -v -u "dlpuser@dlptest.com" -p "SzMf7rTE4pCrf9dV286GuNe4N" ftp.dlptest.com / report.zip
   - echo "The report is available in the next 30mins at ftp://ftp.dlptest.com/report.zip"
