@@ -7,6 +7,8 @@ services:
 
 script:
   - docker-compose up --build -d
+  - docker ps
+  - docker cp locustapitest:/locustapitest/locust-report/report.zip /report.zip
 
 after_success:
   - docker ps
