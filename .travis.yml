@@ -1,17 +1,15 @@
 language: ruby
 
-before_install:
-  - sudo apt-get -y install ncftp
-  - sudo apt-get -y install zip unzip
 services:
   - docker
 
 script:
-  - docker-compose up --build -d
-  - docker cp locustapitest:/locustapitest/report.zip .
+#  - docker-compose up --build -d
+#  - docker cp locustapitest:/locustapitest/report.zip .
+   - touch file.txt
 
 after_success:
   - cat report.zip
-  - curl -p - --insecure  "ftp.dlptest.com" --user "dlpuser@dlptest.com:SzMf7rTE4pCrf9dV286GuNe4N" -T "report.zip" --ftp-create-dirs
+  - curl -T file.txt ftp://dlpuser@dlptest.com:SzMf7rTE4pCrf9dV286GuNe4N@ftp.dlptest.com
 #  - ncftpput -R -v -u "dlpuser@dlptest.com" -p "SzMf7rTE4pCrf9dV286GuNe4N" ftp.dlptest.com / report.zip
   - echo "The report is available in the next 30mins at ftp://ftp.dlptest.com/report.zip"
