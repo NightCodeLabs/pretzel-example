@@ -23,9 +23,9 @@ WORKDIR /locustapitest
 # Mvn Install the project
 RUN mvn install
 
-# Publish the Report // swap this part with your own Amazon S3 server or private hosting!
+# Zipping the Report for better copying
 RUN apk add zip unzip
+RUN zip -r report.zip ./target/cucumber-reports/
 
-RUN mkdir /locust_report/
-RUN ls -la
-RUN zip -r /locust_report/report.zip ./target/cucumber-reports/
+
+ENTRYPOINT java -jar ./target/locustapitest-0.0.1-SNAPSHOT.jar
