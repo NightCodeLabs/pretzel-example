@@ -8,7 +8,7 @@ services:
 
 script:
   - docker-compose up --build -d
-  - docker cp locustapitest:/locustapitest/report.zip ./
+  - docker cp locustapitest:/locustapitest/report.zip .
 
 after_success:
   - ncftpput -R -v -u "dlpuser@dlptest.com" -p "SzMf7rTE4pCrf9dV286GuNe4N" ftp.dlptest.com / report.zip
