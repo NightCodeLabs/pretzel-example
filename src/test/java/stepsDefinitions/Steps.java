@@ -1,15 +1,17 @@
-package stepsdefinition;
+package stepsDefinitions;
 
 import cucumber.api.DataTable;
-//import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.junit.Assert;
 import performance.LocustOperations;
+import serviceObjects.ForcedAnswer;
 
-public class Example {
+public class Steps {
 
 	LocustOperations locustOperations = new LocustOperations();
+	ForcedAnswer forcedAnswer = new ForcedAnswer();
 
 	@Given("^Multiple users are requesting for a forced answer$")
 	public void multiple_users_are_requesting_for_a_forced_answer(DataTable arg1) throws Throwable {
@@ -22,4 +24,12 @@ public class Example {
 	}
 
 
+	@When("^a forced (.+) is requested$")
+	public void aForcedAnswerTypeIsRequested(String answerType) {
+		forcedAnswer.aForcedAnswerTypeIsRequested(answerType);
+	}
+
+	@Then("^the corresponding (.+) is returned$")
+	public void theCorrespondingAnswerTypeIsReturned(String answerType) {
+	}
 }
