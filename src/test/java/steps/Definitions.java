@@ -1,4 +1,4 @@
-package stepsDefinitions;
+package steps;
 
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -6,9 +6,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import performance.LocustOperations;
-import serviceObjects.ForcedAnswer;
+import serviceobjects.ForcedAnswer;
 
-public class Steps {
+public class Definitions {
 
 	LocustOperations locustOperations = new LocustOperations();
 	ForcedAnswer forcedAnswer = new ForcedAnswer();

@@ -6,3 +6,5 @@
 .project
 locustapitest.iml
 src/main/resources/performance/locust-master.pyc
+src/main/resources/performance/__pycache__/locust-master.*.pyc
+

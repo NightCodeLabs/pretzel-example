@@ -27,7 +27,8 @@ We need an easy, reusable way to tackle this, which would enable our development
 - In command line run:   
  ```  
   $ mvn install  
- ```  
+ ``` 
+ 
 #### Linux  
 - Install JDK  
 - Install Python:  
@@ -52,3 +53,9 @@ We need an easy, reusable way to tackle this, which would enable our development
  ```  
   $ mvn install  
  ```   
+
+#### Running specific tests
+- To run a test with specific tags
+ ```  
+  $ mvn test -Dcucumber.options="--tags @Functional"
+ ```

@@ -1,4 +1,4 @@
-package stepsDefinitions;
+package steps;
 
 import java.io.File;
 import java.io.IOException;
