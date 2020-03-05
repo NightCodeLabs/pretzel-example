@@ -1,4 +1,4 @@
-package serviceObjects;
+package serviceobjects;
 
 import io.restassured.RestAssured;
 import io.restassured.http.Method;

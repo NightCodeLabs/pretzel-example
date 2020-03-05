@@ -1,4 +1,4 @@
-package locustTask;
+package locusttask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import com.github.myzhan.locust4j.AbstractTask;
 import com.github.myzhan.locust4j.Locust;
 
-import serviceObjects.ForcedAnswer;
+import serviceobjects.ForcedAnswer;
 
 
 public class ForcedNo extends AbstractTask  {

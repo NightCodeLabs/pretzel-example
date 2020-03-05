@@ -17,15 +17,14 @@ import helpers.FileOperations;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue={"stepsDefinitions"},
-        tags = {"@Performance"},
+        glue={"steps"},
         plugin = {"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
         monochrome = true
 )
 
-public class TestPerformanceRunner {
+public class TestRunner {
 
-		private static final Logger logger = LoggerFactory.getLogger(TestPerformanceRunner.class);
+		private static final Logger logger = LoggerFactory.getLogger(TestRunner.class);
 
 		@BeforeClass
 		public static void cleanLocustChartsDirectory() {
