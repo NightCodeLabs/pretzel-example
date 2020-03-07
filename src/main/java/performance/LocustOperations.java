@@ -1,5 +1,6 @@
 package performance;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -116,15 +117,15 @@ public class LocustOperations {
     
     @SuppressWarnings("resource")
 	public Boolean checkLocustService() {
-    	Process process;
-    	Scanner reader;
     	//String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();    	 
          try {
+        	 Process process;
+        	 Scanner reader;
         	 if (operatingSystem.indexOf("win") >= 0) {
          		process = Runtime.getRuntime().exec("tasklist");
               	
               } else {
-             	 process = Runtime.getRuntime().exec("ps -few");
+             	 process = Runtime.getRuntime().exec("ps aux");
               }
         	 reader = new Scanner(process.getInputStream(), "UTF-8");
         	 while(reader.hasNextLine()) {
