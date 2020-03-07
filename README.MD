@@ -11,6 +11,10 @@ We need an easy, reusable way to tackle this, which would enable our development
  ```  
   $ docker-compose up --build -d
  ``` 
+- Copy Report  
+ ```  
+  $ docker cp locustapitest:/locustapitest/report.zip .
+ ``` 
 
 ### Local execution  
 #### Windows  
@@ -27,7 +31,8 @@ We need an easy, reusable way to tackle this, which would enable our development
 - In command line run:   
  ```  
   $ mvn install  
- ```  
+ ``` 
+ 
 #### Linux  
 - Install JDK  
 - Install Python:  
@@ -52,3 +57,9 @@ We need an easy, reusable way to tackle this, which would enable our development
  ```  
   $ mvn install  
  ```   
+
+#### Running specific tests
+- To run a test with specific tags
+ ```  
+  $ mvn test -Dcucumber.options="--tags @Functional"
+ ```

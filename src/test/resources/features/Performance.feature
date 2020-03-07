@@ -1,6 +1,6 @@
+Feature: Performance Test
 
-Feature: Locust Performance Test YESNO Api
-
+  @Performance
   Scenario Outline:  Request a forced answer
     Given Multiple users are requesting for a forced answer
       | Max Users Load | Users Load Per Second | Test Time | Max RPS |Task  |
@@ -10,6 +10,6 @@ Feature: Locust Performance Test YESNO Api
       |<Expected Time>|
 
     Examples:
-      |Max Users Load|Users Load Per Second | Test Time | Max RPS |Task            | Expected Time |
-      |1             |                   1  |          1|        1|YesNoApi		 		 |           10000|
-      |2             |                   2  |          1|        2|YesNoApi2	 		 |           10000|
+      |Max Users Load|Users Load Per Second | Test Time | Max RPS |Task         | Expected Time |
+      |1             |                   1  |          1|        1|ForcedYes	|          10000|
+      |2             |                   2  |          1|        2|ForcedNo	    |          10000|

@@ -17,16 +17,15 @@ import helpers.FileOperations;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue={"stepsdefinition"},
-        //tags = {""},
+        glue={"steps"},
         plugin = {"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
         monochrome = true
 )
 
 public class TestRunner {
-	
+
 		private static final Logger logger = LoggerFactory.getLogger(TestRunner.class);
-	
+
 		@BeforeClass
 		public static void cleanLocustChartsDirectory() {
 			//Delete and create the locustcharts folder in order to ensure that exists in every execution
@@ -41,5 +40,7 @@ public class TestRunner {
 	            logger.error("Something went wrong writting in the Extent Report");
 	        }
 
-	    }	
+	    }
+
+
 }

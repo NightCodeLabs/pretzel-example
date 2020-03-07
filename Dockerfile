@@ -20,5 +20,13 @@ RUN mkdir locustapitest
 COPY / /locustapitest
 WORKDIR /locustapitest
 
+
 # Mvn Install the project
 RUN mvn install
+
+## Zipping the Report for better copying
+RUN apk add zip unzip
+RUN zip -r report.zip ./target/cucumber-reports/
+
+
+ENTRYPOINT java -jar ./target/locustapitest-0.0.1-SNAPSHOT.jar

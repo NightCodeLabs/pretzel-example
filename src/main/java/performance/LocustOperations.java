@@ -20,7 +20,7 @@ import cucumber.api.DataTable;
 
 public class LocustOperations {
 	
-	private static final String TASKPACKAGEPATH = "locustTask";
+	private static final String TASKPACKAGEPATH = "locusttask";
 	private static final String NAMEOFREPORT = "performanceResults";
 	private static final Logger logger = LoggerFactory.getLogger(LocustOperations.class);
 	private static String masterFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getLocustMasterFilePath());
