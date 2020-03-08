@@ -106,6 +106,11 @@ public class LocustOperations {
 			}
 		}
 		this.executeMaster();
+		if (operatingSystem.indexOf("win") >= 0) {
+			while (!checkWindowsLocustService()) {
+				logger.info("Waiting to locust service to start");
+			}
+		}
 		this.setUpSlave();
 		this.executeTask(testData);
 		TimeUnit.MINUTES.sleep(this.testTime);
