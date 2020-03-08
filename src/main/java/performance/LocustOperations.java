@@ -36,6 +36,7 @@ public class LocustOperations {
     private int weight;
     private int testTime;
 
+    Process locustProcess;
 	private Locust locust = Locust.getInstance();	
 	/*
 	 * This method set the data defined in cucumber in the private variables
@@ -71,7 +72,7 @@ public class LocustOperations {
 	 */
     @SuppressWarnings("unused")
 	public void executeMaster() {
-    	Process locustProcess;
+    	//Process locustProcess;
         //String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
         String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
 
@@ -103,8 +104,10 @@ public class LocustOperations {
     public void executePerformanceTask(DataTable testData) throws Exception {
         this.setTestData(testData);
         //TimeUnit.SECONDS.sleep(10);
+        if (operatingSystem.indexOf("win") >= 0) {
         while (checkLocustService()){
         	logger.info("Waiting to locust service to be stopped");
+        }
         }
         this.executeMaster();
         this.setUpSlave();
@@ -113,6 +116,9 @@ public class LocustOperations {
         TimeUnit.MINUTES.sleep(this.testTime);
         this.locust.stop();
         this.clearValues();
+        if (operatingSystem.indexOf("win") < 0) {
+        	locustProcess.onExit().get();
+        }
     }
     
     @SuppressWarnings("resource")
