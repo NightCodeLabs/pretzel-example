@@ -1,6 +1,5 @@
 package performance;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +35,7 @@ public class LocustOperations {
     private int weight;
     private int testTime;
 
-    Process locustProcess;
+    private Process locustMasterProcess;
 	private Locust locust = Locust.getInstance();	
 	/*
 	 * This method set the data defined in cucumber in the private variables
@@ -72,8 +71,6 @@ public class LocustOperations {
 	 */
     @SuppressWarnings("unused")
 	public void executeMaster() {
-    	//Process locustProcess;
-        //String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
         String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
 
         if (operatingSystem.indexOf("win") >= 0) {
@@ -82,7 +79,7 @@ public class LocustOperations {
         	command= "locust " + command;
         }
         try {
-        	locustProcess = Runtime.getRuntime().exec(command);
+        	locustMasterProcess = Runtime.getRuntime().exec(command);
         } catch (IOException error) {
         	logger.error("Something went wrong executing the master");
         }
@@ -102,58 +99,36 @@ public class LocustOperations {
      * This method execute the sequence needed for run the test
      */
     public void executePerformanceTask(DataTable testData) throws Exception {
-        this.setTestData(testData);
-        //TimeUnit.SECONDS.sleep(10);
-        if (operatingSystem.indexOf("win") >= 0) {
-        while (checkLocustService()){
-        	logger.info("Waiting to locust service to be stopped");
-        }
-        }
-        this.executeMaster();
-        this.setUpSlave();
-        //TimeUnit.SECONDS.sleep(10);
-        this.executeTask(testData);
-        TimeUnit.MINUTES.sleep(this.testTime);
-        this.locust.stop();
-        this.clearValues();
-        if (operatingSystem.indexOf("win") < 0) {
-        	locustProcess.onExit().get();
-        }
-    }
+		this.setTestData(testData);
+		if (operatingSystem.indexOf("win") >= 0) {
+			while (checkWindowsLocustService()) {
+				logger.info("Waiting to locust service to be stopped");
+			}
+		}
+		this.executeMaster();
+		this.setUpSlave();
+		this.executeTask(testData);
+		TimeUnit.MINUTES.sleep(this.testTime);
+		this.locust.stop();
+		this.clearValues();
+		if (operatingSystem.indexOf("win") < 0) {
+			locustMasterProcess.onExit().get();
+		}
+	}
     
     @SuppressWarnings("resource")
-	public Boolean checkLocustService() {
-    	//String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();    	 
-         try {
-        	 Process process;
-        	 Scanner reader;
-        	 if (operatingSystem.indexOf("win") >= 0) {
-         		process = Runtime.getRuntime().exec("tasklist");
-              	
-              } else {
-             	 process = Runtime.getRuntime().exec("ps aux");
-              }
-        	 reader = new Scanner(process.getInputStream(), "UTF-8");
+	public Boolean checkWindowsLocustService() {
+         try {               	 
+        	 Process process = Runtime.getRuntime().exec("tasklist");
+        	 Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
         	 while(reader.hasNextLine()) {
                  if(reader.nextLine().contains("locust"))
                      return true;
-                 	//reader.close();
-         	}
-             //reader.close();
-             
+         	}             
          } catch (IOException error) {
-         	logger.error("Something went wrong executing the master");
+         	logger.error("Something went wrong checking locust service in windows system");
          }
     	return false;
-    	//Process process = Runtime.getRuntime().exec("tasklist");
-        //Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
-        /*while(reader.hasNextLine()) {
-            if(reader.nextLine().contains("locust.exe"))
-                return true;
-            	//reader.close();
-    	}
-        //reader.close();
-        return false;*/
     }
     
     //It returns true or false if the Max response time is higher or not than the expected 

@@ -18,6 +18,7 @@ import helpers.FileOperations;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue={"steps"},
+     	tags = {"~@ignore"},
         plugin = {"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
         monochrome = true
 )
