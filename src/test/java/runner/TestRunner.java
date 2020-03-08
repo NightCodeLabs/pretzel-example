@@ -29,7 +29,7 @@ public class TestRunner {
 
 		@BeforeClass
 		public static void cleanLocustChartsDirectory() {
-			//Delete and create the locustcharts folder in order to ensure that exists in every execution
+			//Delete and create the locustcharts folder and csv folder in order to ensure that exists in every execution
 			FileOperations.getInstance().folderInitialisation(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getChartPath()), FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath()));
 		}
 
