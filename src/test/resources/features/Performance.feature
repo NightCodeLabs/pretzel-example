@@ -13,4 +13,3 @@ Feature: Performance Test
       |Max Users Load|Users Load Per Second | Test Time | Max RPS |Task         | Expected Time |
       |1             |                   1  |          1|        1|ForcedYes		|          10000|
       |2             |                   1  |          1|        2|ForcedNo	    |          10000|
-      |3             |                   1  |          1|        3|ForcedYes		|          10000|
