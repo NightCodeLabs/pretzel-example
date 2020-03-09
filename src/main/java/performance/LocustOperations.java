@@ -100,15 +100,10 @@ public class LocustOperations {
      */
     public void executePerformanceTask(DataTable testData) throws Exception {
 		this.setTestData(testData);
-		if (operatingSystem.indexOf("win") >= 0) {
-			while (checkWindowsLocustService()) {
-				logger.info("Waiting to locust service to be stopped");
-			}
-		}
 		this.executeMaster();
 		if (operatingSystem.indexOf("win") >= 0) {
 			while (!checkWindowsLocustService()) {
-				logger.info("Waiting to locust service to start");
+				logger.info("Waiting to locust master service to start");
 			}
 		}
 		this.setUpSlave();
@@ -116,7 +111,11 @@ public class LocustOperations {
 		TimeUnit.MINUTES.sleep(this.testTime);
 		this.locust.stop();
 		this.clearValues();
-		if (operatingSystem.indexOf("win") < 0) {
+		if (operatingSystem.indexOf("win") >= 0) {
+			while (checkWindowsLocustService()) {
+				logger.info("Waiting to locust master service to be stopped");
+			}
+		} else {
 			locustMasterProcess.onExit().get();
 		}
 	}
