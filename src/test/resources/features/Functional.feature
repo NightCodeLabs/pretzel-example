@@ -1,6 +1,5 @@
 Feature: Functional Test
 
-	@ignore
   @Functional
   Scenario Outline: Request a Forced <answerType> Answer
     When a forced <answerType> is requested
