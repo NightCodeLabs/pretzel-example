@@ -33,6 +33,10 @@ public class ConfigReader {
 	public String getStatsReportPath() {
 		return properties.getProperty("statsReportLocation");
 	}
+	
+	public String getStatsHistoryReportPath() {
+		return properties.getProperty("statsHistoryReportLocation");
+	}
 
 	public String getChartPath() {
 		return properties.getProperty("chartLocation");

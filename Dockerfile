@@ -2,12 +2,12 @@ FROM grubykarol/locust:0.13.5-python3.8-alpine3.11
 
 # Install OpenJDK-8
 RUN apk update
-RUN apk add --no-cache openjdk8
+RUN apk add --no-cache openjdk9
 
 # Setup JAVA_HOME -- useful for docker commandline
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
-ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
+ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk
+ENV PATH $PATH:/usr/lib/jvm/java-9-openjdk/jre/bin:/usr/lib/jvm/java-9-openjdk/bin
 
 # Install Maven
 RUN apk add maven

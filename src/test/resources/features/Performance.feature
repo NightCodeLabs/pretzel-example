@@ -11,5 +11,5 @@ Feature: Performance Test
 
     Examples:
       |Max Users Load|Users Load Per Second | Test Time | Max RPS |Task         | Expected Time |
-      |1             |                   1  |          1|        1|ForcedYes	|          10000|
-      |2             |                   2  |          1|        2|ForcedNo	    |          10000|
+      |1             |                   1  |          1|        1|ForcedYes		|          10000|
+      |2             |                   1  |          1|        2|ForcedNo	    |          10000|
