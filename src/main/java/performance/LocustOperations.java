@@ -69,12 +69,13 @@ public class LocustOperations {
 	/*
 	 * This method raise the master with the parameters of the test defined in cucumber
 	 */
-    @SuppressWarnings("unused")
 	public void executeMaster() {
-        String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
-
+		System.out.println(csvReportFilePath+"\\"+ NAMEOFREPORT);
+        //String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"\\"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
+        String command="-f "+ masterFilePath +" --master --no-web --csv="+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
         if (operatingSystem.indexOf("win") >= 0) {
         	command = "cmd.exe /c start /MIN locust.exe " + command;
+        	System.out.println(command);
         } else {
         	command= "locust " + command;
         }
