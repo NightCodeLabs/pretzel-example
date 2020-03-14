@@ -120,15 +120,17 @@ public class LocustOperations {
 		}
 	}
     
-    @SuppressWarnings("resource")
-	public Boolean checkWindowsLocustService() {
+    public Boolean checkWindowsLocustService() {
          try {               	 
         	 Process process = Runtime.getRuntime().exec("tasklist");
         	 Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
         	 while(reader.hasNextLine()) {
-                 if(reader.nextLine().contains("locust"))
+                 if(reader.nextLine().contains("locust")) {
+                	 reader.close();
                      return true;
-         	}             
+                 }
+         	}    
+        	 reader.close(); 
          } catch (IOException error) {
          	logger.error("Something went wrong checking locust service in windows system");
          }
