@@ -24,7 +24,6 @@ public class LocustOperations {
 	private static final Logger logger = LoggerFactory.getLogger(LocustOperations.class);
 	private static String masterFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getLocustMasterFilePath());
     private static String operatingSystem = System.getProperty("os.name").toLowerCase();
-    //private static String csvReportFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath());
 
 	private String locustTask;
     private String master = "127.0.0.1";
