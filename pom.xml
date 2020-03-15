@@ -3,7 +3,7 @@
   <groupId>com.demo.locustapitest</groupId>
   <artifactId>locustapitest</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>locust4j</name>
+  <name>locustapitest</name>
   <description>Load and Performance Test done in BDD Style with Java, Locust4j and Cucumber</description>
   <url>https://github.com/cucumber-locust4j/locustapitest</url>
   
@@ -35,8 +35,6 @@
   
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>9</maven.compiler.source>
-		<maven.compiler.target>9</maven.compiler.target>
 	</properties>
 
 	<dependencies>
