@@ -40,10 +40,10 @@ public class LocustBarChart {
      */
 	public void createChart() {
 		this.fileName = "performanceChart"+System.currentTimeMillis()+".png";
-		File file = new File(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getChartPath())+"/"+this.fileName);
-        JFreeChart chart = ChartFactory.createBarChart(TITLE,CATEGORYAXISLABELTITLE,VALUEAXISLABELTITLE, createDataset(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getStatsReportPath())), PlotOrientation.VERTICAL,false,true,false);
+		File file = new File(ConfigReader.getInstance().getChartPath()+"/"+this.fileName);
+        JFreeChart chart = ChartFactory.createBarChart(TITLE,CATEGORYAXISLABELTITLE,VALUEAXISLABELTITLE, createDataset(ConfigReader.getInstance().getStatsReportPath()), PlotOrientation.VERTICAL,false,true,false);
         chart.addSubtitle(0, new TextTitle(" "));
-        chart.addSubtitle(1, new TextTitle(this.createRequestResults(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getStatsReportPath()))));
+        chart.addSubtitle(1, new TextTitle(this.createRequestResults(ConfigReader.getInstance().getStatsReportPath())));
         chart.addSubtitle(2, new TextTitle(" "));
         try {
             ChartUtils.saveChartAsPNG(file, chart, CHARTWIDTH, CHARTHEIGHT);
