@@ -22,8 +22,8 @@ public class LocustOperations {
 	private static final String TASKPACKAGEPATH = "locusttask";
 	private static final String NAMEOFREPORT = "performanceResults";
 	private static final Logger logger = LoggerFactory.getLogger(LocustOperations.class);
-	private static String masterFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getLocustMasterFilePath());
-    private static String csvReportFilePath = FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath());
+	private static String masterFilePath = ConfigReader.getInstance().getLocustMasterFilePath();
+	private static String csvReportFilePath = ConfigReader.getInstance().getCsvReportFolderPath();
     private static String operatingSystem = System.getProperty("os.name").toLowerCase();
 
 	private String locustTask;
@@ -69,10 +69,8 @@ public class LocustOperations {
 	/*
 	 * This method raise the master with the parameters of the test defined in cucumber
 	 */
-    @SuppressWarnings("unused")
 	public void executeMaster() {
-        String command="-f "+ masterFilePath +" --master --no-web --csv="+csvReportFilePath +"/"+ NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
-
+        String command="-f "+ masterFilePath +" --master --no-web --csv="+ csvReportFilePath + NAMEOFREPORT +" --expect-slaves=1 -c "+ maxUsers +" -r "+ usersLoadPerSecond+" -t"+testTime+"m";
         if (operatingSystem.indexOf("win") >= 0) {
         	command = "cmd.exe /c start /MIN locust.exe " + command;
         } else {
@@ -120,15 +118,17 @@ public class LocustOperations {
 		}
 	}
     
-    @SuppressWarnings("resource")
-	public Boolean checkWindowsLocustService() {
+    public Boolean checkWindowsLocustService() {
          try {               	 
         	 Process process = Runtime.getRuntime().exec("tasklist");
         	 Scanner reader = new Scanner(process.getInputStream(), "UTF-8");
         	 while(reader.hasNextLine()) {
-                 if(reader.nextLine().contains("locust"))
+                 if(reader.nextLine().contains("locust")) {
+                	 reader.close();
                      return true;
-         	}             
+                 }
+         	}    
+        	 reader.close(); 
          } catch (IOException error) {
          	logger.error("Something went wrong checking locust service in windows system");
          }
@@ -138,7 +138,7 @@ public class LocustOperations {
     //It returns true or false if the Max response time is higher or not than the expected 
     public Boolean checkMaxResponseTime(DataTable testData) {
     	Boolean higher = false;
-    	List<String[]> data = FileOperations.getInstance().readCSV(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getStatsReportPath()));    	
+    	List<String[]> data = FileOperations.getInstance().readCSV(ConfigReader.getInstance().getStatsReportPath());    	
     	try {
 			if (this.getMaxResponseTime(data, (data.size()-1))>Long.parseLong(AuxiliarMethods.getInstance().getDataTableValue(testData, "Expected Time"))){
 				higher = true;

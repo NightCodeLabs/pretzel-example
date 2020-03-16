@@ -30,13 +30,13 @@ public class TestRunner {
 		@BeforeClass
 		public static void cleanLocustChartsDirectory() {
 			//Delete and create the locustcharts folder and csv folder in order to ensure that exists in every execution
-			FileOperations.getInstance().folderInitialisation(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getChartPath()), FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getCsvReportFolderPath()));
+			FileOperations.getInstance().folderInitialisation(ConfigReader.getInstance().getChartPath(), ConfigReader.getInstance().getCsvReportFolderPath());
 		}
 
 	    @AfterClass
 	    public static void writeExtentReport() {
 	        try {
-	            Reporter.loadXMLConfig(new File(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getExtentReportConfigPath())));
+	            Reporter.loadXMLConfig(new File(ConfigReader.getInstance().getExtentReportConfigPath()));
 	        } catch (NoSuchMethodError ex){
 	            logger.error("Something went wrong writting in the Extent Report");
 	        }

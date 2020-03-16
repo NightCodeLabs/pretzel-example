@@ -11,7 +11,6 @@ import cucumber.api.java.Before;
 
 import graph.LocustBarChart;
 import helpers.ConfigReader;
-import helpers.FileOperations;
 
 public class Hooks {
 	
@@ -29,7 +28,7 @@ public class Hooks {
 			//Create the chart after Scenario iteration
 			LocustBarChart locustBarChart = new LocustBarChart();
 			locustBarChart.createChart();
-			File destinationPath = new File(FileOperations.getInstance().getAbsolutePath(ConfigReader.getInstance().getChartPath() + locustBarChart.getFileName()));
+			File destinationPath = new File(ConfigReader.getInstance().getChartPath() + locustBarChart.getFileName());
 			//Add the image to the Report
 			Reporter.addScreenCaptureFromPath(destinationPath.toString(), "Performance Results");
 		}

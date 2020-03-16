@@ -3,9 +3,9 @@
   <groupId>com.demo.locustapitest</groupId>
   <artifactId>locustapitest</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>locust4j</name>
-  <description>LocustApiTest is a load automation framework test written in java that use cucumber, restassured and locust4j.</description>
-  <url>https://github.com/dmarcas/locustapitest.git</url>
+  <name>locustapitest</name>
+  <description>Load and Performance Test done in BDD Style with Java, Locust4j and Cucumber</description>
+  <url>https://github.com/cucumber-locust4j/locustapitest</url>
   
   <licenses>
        <license>
@@ -17,7 +17,7 @@
    
    <issueManagement>
        <system>Github Issues</system>
-       <url>https://github.com/dmarcas/locustapitest/issues</url>
+       <url>https://github.com/cucumber-locust4j/locustapitest/issues</url>
    </issueManagement>
    
    <developers>
@@ -35,8 +35,6 @@
   
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
@@ -176,35 +174,35 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
-     <plugins>
-       <plugin>
-         <groupId>org.apache.maven.plugins</groupId>
-         <artifactId>maven-compiler-plugin</artifactId>
-         <version>3.7.0</version>
-         <configuration>
-           <source>1.8</source>
-           <target>1.8</target>
-            <encoding>UTF-8</encoding>          
-         </configuration>
-       </plugin>
-         <plugin>
-             <!-- Build an executable JAR -->
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-jar-plugin</artifactId>
-             <version>3.1.0</version>
-             <configuration>
-                 <archive>
-                     <manifest>
-                         <addClasspath>true</addClasspath>
-                         <classpathPrefix>lib/</classpathPrefix>
-                         <mainClass>com.demo.locustapitest.locustapitest.Main</mainClass>
-                     </manifest>
-                 </archive>
-             </configuration>
-         </plugin>
-       </plugins>
-   </build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>9</source>
+					<target>9</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- Build an executable JAR -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.demo.locustapitest.locustapitest.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
   
 </project>

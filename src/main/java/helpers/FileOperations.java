@@ -94,8 +94,6 @@ public class FileOperations {
 	   try {
 			  FileUtils.deleteDirectory(new File(path));
 			  FileUtils.forceMkdir(new File(path));
-			  File historyStats = new File(this.getAbsolutePath(ConfigReader.getInstance().getStatsHistoryReportPath()));
-			  File stats = new File(this.getAbsolutePath(ConfigReader.getInstance().getStatsReportPath()));
 		  } catch (IOException e) {
 			  logger.error("Something went wrong initialising the csv directory");
 		  }		
