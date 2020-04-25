@@ -53,5 +53,13 @@ public class ConfigReader {
 	public String getExtentReportConfigPath() {
 		return properties.getProperty("extentReportConfigLocation");
 	}
+	
+	public String getIpLocustMaster() {
+		return properties.getProperty("ipLocustMaster");
+	}
 
+	public String getRemoteLocustMasterOS() {
+		return properties.getProperty("remoteLocustMasterOS");
+	}
+	
 }
