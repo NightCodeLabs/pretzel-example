@@ -166,12 +166,19 @@
     		<artifactId>slf4j-jdk14</artifactId>
     		<version>1.7.30</version>
 		</dependency>
-    	
-    	<dependency>
-    		<groupId>com.opencsv</groupId>
-    		<artifactId>opencsv</artifactId>
-    		<version>4.1</version>
-		</dependency>
+
+	<dependency>
+		<groupId>com.opencsv</groupId>
+		<artifactId>opencsv</artifactId>
+		<version>4.1</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>com.github.cucumberlocust4j</groupId>
+    	<artifactId>pretzel</artifactId>
+    	<version>0.0.20200425184712</version>
+	</dependency>
+	
 
 	</dependencies>
 
