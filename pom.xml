@@ -176,7 +176,7 @@
 	<dependency>
     	<groupId>com.github.cucumberlocust4j</groupId>
     	<artifactId>pretzel</artifactId>
-    	<version>0.0.20200425184712</version>
+    	<version>0.0.20200426165004</version>
 	</dependency>
 	
 

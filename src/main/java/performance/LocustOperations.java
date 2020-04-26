@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import helpers.AuxiliarMethods;
 import helpers.ConfigReader;
-import com.github.cucumberlocust4j.helpers.FileOperations;
+import com.github.cucumberlocust4j.pretzel.helpers.FileOperations;
 
 import com.github.myzhan.locust4j.AbstractTask;
 import com.github.myzhan.locust4j.Locust;

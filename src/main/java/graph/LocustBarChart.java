@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import helpers.ConfigReader;
-import com.github.cucumberlocust4j.helpers.FileOperations;
+import com.github.cucumberlocust4j.pretzel.helpers.FileOperations;
 
 
 
