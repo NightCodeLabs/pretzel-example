@@ -9,8 +9,8 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
-import graph.LocustBarChart;
-import helpers.ConfigReader;
+import com.github.cucumberlocust4j.pretzel.graph.LocustBarChart;
+import com.github.cucumberlocust4j.pretzel.helpers.ConfigReader;
 
 public class Hooks {
 	

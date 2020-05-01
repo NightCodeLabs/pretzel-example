@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import helpers.ConfigReader;
+import com.github.cucumberlocust4j.pretzel.helpers.ConfigReader;
 import com.github.cucumberlocust4j.pretzel.helpers.FileOperations;
 
 @RunWith(Cucumber.class)
