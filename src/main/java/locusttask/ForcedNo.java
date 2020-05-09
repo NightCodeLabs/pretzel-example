@@ -1,16 +1,14 @@
 package locusttask;
 
+import com.github.cucumberlocust4j.pretzel.performance.PerformanceTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import com.github.myzhan.locust4j.AbstractTask;
-import com.github.myzhan.locust4j.Locust;
-
 import serviceobjects.ForcedAnswer;
 
 
-public class ForcedNo extends AbstractTask  {
+public class ForcedNo extends PerformanceTask {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ForcedNo.class);
 
@@ -38,9 +36,9 @@ public class ForcedNo extends AbstractTask  {
     public void execute() {
         try {
             forcedAnswer.aForcedAnswerTypeIsRequested("no");
-            Locust.getInstance().recordSuccess("GET", getName(), forcedAnswer.getResponseTime(), 1);
+            performance.recordSuccess("GET", getName(), forcedAnswer.getResponseTime(), 1);
         }catch (AssertionError | Exception error){
-            Locust.getInstance().recordFailure("GET",getName(), forcedAnswer.getResponseTime(),"No has not been returned");
+            performance.recordFailure("GET",getName(), forcedAnswer.getResponseTime(),"No has not been returned");
             logger.info("Something went wrong in the request");
         }
     
