@@ -11,8 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import com.github.cucumberlocust4j.pretzel.helpers.ConfigReader;
-import com.github.cucumberlocust4j.pretzel.helpers.FileOperations;
+import com.github.cucumberlocust4j.pretzel.Pretzel;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -26,17 +25,18 @@ import com.github.cucumberlocust4j.pretzel.helpers.FileOperations;
 public class TestRunner {
 
 		private static final Logger logger = LoggerFactory.getLogger(TestRunner.class);
+		private static Pretzel pretzel = new Pretzel();
 
-		@BeforeClass
-		public static void cleanLocustChartsDirectory() {
-			//Delete and create the locustcharts folder and csv folder in order to ensure that exists in every execution
-			FileOperations.getInstance().folderInitialisation(ConfigReader.getInstance().getChartPath(), ConfigReader.getInstance().getCsvReportFolderPath());
+	    @BeforeClass
+		public static void beforeClass() {
+			pretzel.cleanChartsDirectory();
 		}
+
 
 	    @AfterClass
 	    public static void writeExtentReport() {
 	        try {
-	            Reporter.loadXMLConfig(new File(ConfigReader.getInstance().getExtentReportConfigPath()));
+	            Reporter.loadXMLConfig(new File("src/main/resources/configs/extent-config.xml"));
 	        } catch (NoSuchMethodError ex){
 	            logger.error("Something went wrong writting in the Extent Report");
 	        }

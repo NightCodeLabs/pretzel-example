@@ -9,10 +9,11 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
-import com.github.cucumberlocust4j.pretzel.graph.LocustBarChart;
-import com.github.cucumberlocust4j.pretzel.helpers.ConfigReader;
+import com.github.cucumberlocust4j.pretzel.Pretzel;
 
 public class Hooks {
+
+	Pretzel pretzel = new Pretzel();
 	
 	 @Before
 	 public void BeforeSteps() throws IOException {
@@ -25,12 +26,7 @@ public class Hooks {
 	@After(order = 0)
 	public void AfterSteps(Scenario scenario) throws IOException {
 			if (scenario.getSourceTagNames().contains("@Performance")) {
-			//Create the chart after Scenario iteration
-			LocustBarChart locustBarChart = new LocustBarChart();
-			locustBarChart.createChart();
-			File destinationPath = new File(ConfigReader.getInstance().getChartPath() + locustBarChart.getFileName());
-			//Add the image to the Report
-			Reporter.addScreenCaptureFromPath(destinationPath.toString(), "Performance Results");
+			Reporter.addScreenCaptureFromPath(pretzel.generateReportFilePath(),"Performance Results");
 		}
 
 	}
