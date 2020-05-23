@@ -1,6 +1,5 @@
 package steps;
 
-import java.io.File;
 import java.io.IOException;
 
 import com.vimalselvam.cucumber.listener.Reporter;
@@ -9,7 +8,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
-import com.github.cucumberlocust4j.pretzel.Pretzel;
+import com.github.nightcodelabs.pretzel.Pretzel;
 
 public class Hooks {
 

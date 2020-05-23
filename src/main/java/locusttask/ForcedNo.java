@@ -1,6 +1,6 @@
 package locusttask;
 
-import com.github.cucumberlocust4j.pretzel.performance.PerformanceTask;
+import com.github.nightcodelabs.pretzel.performance.PerformanceTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -134,7 +134,7 @@
 		</dependency>
 
 	<dependency>
-    	<groupId>com.github.cucumberlocust4j</groupId>
+    	<groupId>com.github.nightcodelabs</groupId>
     	<artifactId>pretzel</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
 	</dependency>
