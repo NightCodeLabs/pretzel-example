@@ -18,7 +18,7 @@ import com.github.nightcodelabs.pretzel.Pretzel;
         features = "src/test/resources/features",
         glue={"steps"},
      	tags = {"~@ignore"},
-        plugin = {"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
+        plugin = {"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:target/pretzel/report/report.html"},
         monochrome = true
 )
 
@@ -29,7 +29,7 @@ public class TestRunner {
 
 	    @BeforeClass
 		public static void beforeClass() {
-			pretzel.cleanChartsDirectory();
+			pretzel.initiateReportDirectory();
 		}
 
 

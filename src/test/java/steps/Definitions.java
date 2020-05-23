@@ -23,13 +23,13 @@ public class Definitions {
 		Integer maxRPS = Integer.parseInt(AuxiliarMethods.getInstance().getDataTableValue(testData, "Max RPS"));
 		Integer weight = Integer.parseInt(AuxiliarMethods.getInstance().getDataTableValue(testData,"Weight"));
 		String nameTask = AuxiliarMethods.getInstance().getDataTableValue(testData,"Task");
-		pretzel.executePerformanceTask(maxUsers,usersLoadPerSecond, testTime, maxRPS, weight, nameTask);
+		pretzel.doPretzel(maxUsers,usersLoadPerSecond, testTime, maxRPS, weight, nameTask);
 	}
 
 	@Then("^The answer is returned within the expected time$")
 	public void the_answer_is_returned_within_the_expected_time(DataTable testData) throws Throwable {
 		Long expectedTime = Long.parseLong(AuxiliarMethods.getInstance().getDataTableValue(testData, "Expected Time"));
-		Assert.assertFalse(pretzel.checkMaxResponseTime(expectedTime));
+		Assert.assertFalse(pretzel.checkMaxResponseTimeAboveExpected(expectedTime));
 	}
 
 

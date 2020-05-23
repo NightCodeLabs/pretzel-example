@@ -25,7 +25,7 @@ public class Hooks {
 	@After(order = 0)
 	public void AfterSteps(Scenario scenario) throws IOException {
 			if (scenario.getSourceTagNames().contains("@Performance")) {
-			Reporter.addScreenCaptureFromPath(pretzel.generateReportFilePath(),"Performance Results");
+			Reporter.addScreenCaptureFromPath(pretzel.getGeneratedChartFilePath(),"Performance Results");
 		}
 
 	}

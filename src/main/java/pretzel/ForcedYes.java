@@ -1,6 +1,6 @@
-package locusttask;
+package pretzel;
 
-import com.github.nightcodelabs.pretzel.performance.PerformanceTask;
+import com.github.nightcodelabs.pretzel.performance.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import serviceobjects.ForcedAnswer;
 
 
-public class ForcedYes extends PerformanceTask {
+public class ForcedYes extends Task {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ForcedYes.class);
 
