@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.demo.locustapitest</groupId>
-  <artifactId>locustapitest</artifactId>
+  <groupId>com.github.nightcodelabs</groupId>
+  <artifactId>pretzelExample</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>locustapitest</name>
-  <description>Load and Performance Test done in BDD Style with Java, Locust4j and Cucumber</description>
-  <url>https://github.com/cucumber-locust4j/locustapitest</url>
+  <name>pretzel-example</name>
+  <description>Load and Performance Test Suite with Cucumber and Pretzel</description>
+  <url>https://github.com/pretzel-example</url>
   
   <licenses>
        <license>
@@ -17,7 +17,7 @@
    
    <issueManagement>
        <system>Github Issues</system>
-       <url>https://github.com/cucumber-locust4j/locustapitest/issues</url>
+       <url>https://github.com/nightcodelabs/pretzel-example/issues</url>
    </issueManagement>
    
    <developers>
@@ -27,7 +27,6 @@
             <url>https://github.com/dmarcas</url>
         </developer>
         <developer>
-            <name>Andrei Danilov</name>
             <id>therussiankid92</id>
             <url>https://github.com/therussiankid92</url>
         </developer>
@@ -164,7 +163,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.demo.locustapitest.locustapitest.Main</mainClass>
+							<mainClass>com.github.nightcodelabs.pretzelExample.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

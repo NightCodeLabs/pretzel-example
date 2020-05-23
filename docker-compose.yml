@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     stdin_open: true
     tty: true
-    container_name: locustapitest
+    container_name: pretzel-example
 
     ports:
       - 5557:5557
