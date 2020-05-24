@@ -1,8 +1,8 @@
-# Pretzel
+# Pretzel-Example
 [![Build Status](https://travis-ci.com/nightcodelabs/pretzel-example.svg?branch=master)](https://travis-ci.com/nightcodelabs/pretzel-example)
 
 # Purpose  
-This is an example of how to use pretzel library with Cucumber in order to do Load & Performance Tests.
+This is an example of how to use [pretzel](https://github.com/NightCodeLabs/pretzel) java library with Cucumber in order to do Load & Performance Tests.
 
 # General objectives
 Teams use BDD to drive development based on the user behaviour, but stories never go beyond a single user, defects are found very late within development or even in production and there are no service level agreements, only actual user behaviour!  
