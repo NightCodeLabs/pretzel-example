@@ -135,7 +135,7 @@
 	<dependency>
     	<groupId>com.github.nightcodelabs</groupId>
     	<artifactId>pretzel</artifactId>
-    	<version>0.0.1</version>
+    	<version>0.0.2</version>
 	</dependency>
 
 
