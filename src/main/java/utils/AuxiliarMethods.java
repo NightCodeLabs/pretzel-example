@@ -1,13 +1,12 @@
-package helpers;
+package utils;
+
+import cucumber.api.DataTable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import cucumber.api.DataTable;
 
 public class AuxiliarMethods {
 	

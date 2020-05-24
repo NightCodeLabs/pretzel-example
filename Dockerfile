@@ -16,9 +16,9 @@ RUN apk add maven
 RUN apk --update add fontconfig ttf-dejavu
 
 # Copy the files from the machine
-RUN mkdir locustapitest
-COPY / /locustapitest
-WORKDIR /locustapitest
+RUN mkdir pretzel-example
+COPY / /pretzel-example
+WORKDIR /pretzel-example
 
 
 # Mvn Install the project
@@ -26,7 +26,7 @@ RUN mvn install
 
 ## Zipping the Report for better copying
 RUN apk add zip unzip
-RUN zip -r report.zip ./target/cucumber-reports/
+RUN zip -r report.zip ./target/pretzel/
 
 
 ENTRYPOINT java -jar ./target/locustapitest-0.0.1-SNAPSHOT.jar

@@ -1,16 +1,14 @@
-package locusttask;
+package pretzel;
 
+import com.github.nightcodelabs.pretzel.performance.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import com.github.myzhan.locust4j.AbstractTask;
-import com.github.myzhan.locust4j.Locust;
-
 import serviceobjects.ForcedAnswer;
 
 
-public class ForcedYes extends AbstractTask  {
+public class ForcedYes extends Task {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ForcedYes.class);
 
@@ -39,9 +37,9 @@ public class ForcedYes extends AbstractTask  {
     public void execute() {
         try {
             forcedAnswer.aForcedAnswerTypeIsRequested("yes");
-            Locust.getInstance().recordSuccess("GET", getName(), forcedAnswer.getResponseTime(), 1);
+            performance.recordSuccess("GET", getName(), forcedAnswer.getResponseTime(), 1);
         }catch (AssertionError | Exception error){
-            Locust.getInstance().recordFailure("GET",getName(), forcedAnswer.getResponseTime(),"Yes has not been returned");
+            performance.recordFailure("GET",getName(), forcedAnswer.getResponseTime(),"Yes has not been returned");
             logger.info("Something went wrong in the request");
         }
     

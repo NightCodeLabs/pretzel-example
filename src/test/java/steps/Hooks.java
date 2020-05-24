@@ -1,6 +1,5 @@
 package steps;
 
-import java.io.File;
 import java.io.IOException;
 
 import com.vimalselvam.cucumber.listener.Reporter;
@@ -9,10 +8,11 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
-import graph.LocustBarChart;
-import helpers.ConfigReader;
+import com.github.nightcodelabs.pretzel.Pretzel;
 
 public class Hooks {
+
+	Pretzel pretzel = new Pretzel();
 	
 	 @Before
 	 public void BeforeSteps() throws IOException {
@@ -25,12 +25,7 @@ public class Hooks {
 	@After(order = 0)
 	public void AfterSteps(Scenario scenario) throws IOException {
 			if (scenario.getSourceTagNames().contains("@Performance")) {
-			//Create the chart after Scenario iteration
-			LocustBarChart locustBarChart = new LocustBarChart();
-			locustBarChart.createChart();
-			File destinationPath = new File(ConfigReader.getInstance().getChartPath() + locustBarChart.getFileName());
-			//Add the image to the Report
-			Reporter.addScreenCaptureFromPath(destinationPath.toString(), "Performance Results");
+			Reporter.addScreenCaptureFromPath(pretzel.getGeneratedChartFilePath(),"Performance Results");
 		}
 
 	}

@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.demo.locustapitest</groupId>
-  <artifactId>locustapitest</artifactId>
+  <groupId>com.github.nightcodelabs</groupId>
+  <artifactId>pretzelExample</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>locustapitest</name>
-  <description>Load and Performance Test done in BDD Style with Java, Locust4j and Cucumber</description>
-  <url>https://github.com/cucumber-locust4j/locustapitest</url>
+  <name>pretzel-example</name>
+  <description>Load and Performance Test Suite with Cucumber and Pretzel</description>
+  <url>https://github.com/pretzel-example</url>
   
   <licenses>
        <license>
@@ -17,7 +17,7 @@
    
    <issueManagement>
        <system>Github Issues</system>
-       <url>https://github.com/cucumber-locust4j/locustapitest/issues</url>
+       <url>https://github.com/nightcodelabs/pretzel-example/issues</url>
    </issueManagement>
    
    <developers>
@@ -27,7 +27,6 @@
             <url>https://github.com/dmarcas</url>
         </developer>
         <developer>
-            <name>Andrei Danilov</name>
             <id>therussiankid92</id>
             <url>https://github.com/therussiankid92</url>
         </developer>
@@ -55,35 +54,14 @@
     		<artifactId>json-path</artifactId>
     		<version>4.1.2</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
     		<groupId>junit</groupId>
     		<artifactId>junit</artifactId>
-    		<version>4.12</version>    		
-		</dependency>	
-		
-		 <!--Locust-->
-        <dependency>
-            <groupId>com.github.myzhan</groupId>
-            <artifactId>locust4j</artifactId>
-            <version>1.0.8</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.simpleflatmapper/sfm-csv -->
-        <dependency>
-            <groupId>org.simpleflatmapper</groupId>
-            <artifactId>sfm-csv</artifactId>
-            <version>3.11</version>
-        </dependency>
-        
-        <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
-		<dependency>
-    		<groupId>org.jfree</groupId>
-    		<artifactId>jfreechart</artifactId>
-    		<version>1.5.0</version>
+    		<version>4.12</version>
 		</dependency>
-		
+
 		<!-- cucumber-Dependencies -->
         <dependency>
             <groupId>info.cukes</groupId>
@@ -134,44 +112,32 @@
     		<artifactId>cucumber-extentsreport</artifactId>
     		<version>3.1.1</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>com.aventstack</groupId>
     		<artifactId>extentreports</artifactId>
     		<version>3.1.5</version>
 		</dependency>
-        
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-csv -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-csv</artifactId>
-            <version>2.10.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        
+
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
   		  	<groupId>org.slf4j</groupId>
     		<artifactId>slf4j-api</artifactId>
     		<version>1.7.30</version>
 		</dependency>
-		
+
 		<dependency>
     		<groupId>org.slf4j</groupId>
     		<artifactId>slf4j-jdk14</artifactId>
     		<version>1.7.30</version>
 		</dependency>
-    	
-    	<dependency>
-    		<groupId>com.opencsv</groupId>
-    		<artifactId>opencsv</artifactId>
-    		<version>4.1</version>
-		</dependency>
+
+	<dependency>
+    	<groupId>com.github.nightcodelabs</groupId>
+    	<artifactId>pretzel</artifactId>
+    	<version>0.0.1</version>
+	</dependency>
+
 
 	</dependencies>
 
@@ -197,7 +163,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.demo.locustapitest.locustapitest.Main</mainClass>
+							<mainClass>com.github.nightcodelabs.pretzelExample.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

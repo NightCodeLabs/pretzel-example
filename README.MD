@@ -1,6 +1,10 @@
-# Locust Api Test  
-[![Build Status](https://travis-ci.com/cucumber-locust4j/locustapitest.svg?branch=master)](https://travis-ci.com/cucumber-locust4j/locustapitest)
+# Pretzel
+[![Build Status](https://travis-ci.com/nightcodelabs/pretzel-example.svg?branch=master)](https://travis-ci.com/nightcodelabs/pretzel-example)
+
 # Purpose  
+This is an example of how to use pretzel library with Cucumber in order to do Load & Performance Tests.
+
+# General objectives
 Teams use BDD to drive development based on the user behaviour, but stories never go beyond a single user, defects are found very late within development or even in production and there are no service level agreements, only actual user behaviour!  
 We need an easy, reusable way to tackle this, which would enable our development teams to drive load and performance testing into their day-to-day activities: from requirements gathering, to test automation as well as having part of the delivery pipeline, reusing the existing Java, RestAssured and Cucumber tests.
   

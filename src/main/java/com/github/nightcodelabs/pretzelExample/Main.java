@@ -1,4 +1,4 @@
-package com.demo.locustapitest.locustapitest;
+package com.github.nightcodelabs.pretzelExample;
 
 import java.util.concurrent.TimeUnit;
 
