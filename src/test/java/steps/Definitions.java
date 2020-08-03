@@ -40,5 +40,6 @@ public class Definitions {
 
 	@Then("^the corresponding (.+) is returned$")
 	public void theCorrespondingAnswerTypeIsReturned(String answerType) {
+		forcedAnswer.theCorrespondingAnswerTypeIsReturned(answerType);
 	}
 }

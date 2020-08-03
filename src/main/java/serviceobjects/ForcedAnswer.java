@@ -15,6 +15,7 @@ public class ForcedAnswer {
 
     }
 
+    private String requestAnswer;
 
     public void aForcedAnswerTypeIsRequested(String answerType) {
         RestAssured.baseURI = "https://yesno.wtf/api";
@@ -22,7 +23,13 @@ public class ForcedAnswer {
         this.response = httpRequest.request(Method.GET, "/?force="+answerType);
         JsonPath answer = response.getBody().jsonPath();
         System.out.println(answer.prettyPrint());
-        Assert.assertEquals("Correct answer returned", answerType , answer.getString("answer"));
+        requestAnswer = answer.getString("answer");
+
+    }
+
+    public void theCorrespondingAnswerTypeIsReturned(String answerType) {
+        Assert.assertEquals("Correct answer returned", answerType , requestAnswer);
+
     }
 
     public long getResponseTime() {

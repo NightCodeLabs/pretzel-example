@@ -36,6 +36,7 @@ public class ForcedNo extends Task {
     public void execute() {
         try {
             forcedAnswer.aForcedAnswerTypeIsRequested("no");
+            forcedAnswer.theCorrespondingAnswerTypeIsReturned("no");
             performance.recordSuccess("GET", getName(), forcedAnswer.getResponseTime(), 1);
         }catch (AssertionError | Exception error){
             performance.recordFailure("GET",getName(), forcedAnswer.getResponseTime(),"No has not been returned");

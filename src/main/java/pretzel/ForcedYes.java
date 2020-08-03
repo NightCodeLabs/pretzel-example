@@ -37,6 +37,7 @@ public class ForcedYes extends Task {
     public void execute() {
         try {
             forcedAnswer.aForcedAnswerTypeIsRequested("yes");
+            forcedAnswer.theCorrespondingAnswerTypeIsReturned("yes");
             performance.recordSuccess("GET", getName(), forcedAnswer.getResponseTime(), 1);
         }catch (AssertionError | Exception error){
             performance.recordFailure("GET",getName(), forcedAnswer.getResponseTime(),"Yes has not been returned");
