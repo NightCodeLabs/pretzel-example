@@ -42,4 +42,15 @@ public class Definitions {
 	public void theCorrespondingAnswerTypeIsReturned(String answerType) {
 		forcedAnswer.theCorrespondingAnswerTypeIsReturned(answerType);
 	}
+
+	@When("^(.+) users request a forced yes at (.+) users/second for (.+) min$")
+	public void usersRequestForcedYesAnswerAtRateMinute(Integer maxUsers, Integer usersLoadPerSecond, Integer testTime) throws Throwable {
+		pretzel.doPretzel(maxUsers,usersLoadPerSecond, testTime, maxUsers, maxUsers, "ForcedYes");
+	}
+
+	@Then("^the answer is returned within (.+) milliseconds$")
+	public void theAnswerIsReturnedWithingMilliseconds(Long expectedTime) {
+		Assert.assertFalse(pretzel.checkMaxResponseTimeAboveExpected(expectedTime));
+	}
+
 }
