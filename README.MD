@@ -36,7 +36,6 @@ We need an easy, reusable way to tackle this, which would enable our development
  ```  
   $ mvn install  
  ``` 
- 
 #### Linux  
 - Install JDK  
 - Install Python:  
